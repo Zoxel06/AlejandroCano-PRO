@@ -15,7 +15,7 @@ public class Ejercicios {
         //ejercicio7();
         //ejercicio8();
         //ejercicio9();
-        //ejercicio10();
+        ejercicio10();
         //ejercicio11();
         //ejercicio12();
         //ejercicio13();
@@ -153,6 +153,7 @@ public class Ejercicios {
 
     public static void ejercicio7(){
 
+
         System.out.println("Escribe un radio entero");
         int radio = lectorTeclado.nextInt();
         double longitudCircunferencia = 2 * Math.PI * radio;
@@ -161,7 +162,9 @@ public class Ejercicios {
         System.out.println("Area del circulo: "+areaCirculo);
     }
 
+
     public static void ejercicio8(){
+
 
         System.out.println("Escribe los grados centigrados");
         float c = lectorTeclado.nextFloat();
@@ -180,7 +183,9 @@ public class Ejercicios {
         System.out.printf("Centigrados: %.2f   Farenheit: %.2f",c,f);
     }
 
+
     public static void ejercicio9(){
+
 
         System.out.println("Introduce el numero de bebidas");
         int bebidas = lectorTeclado.nextInt();
@@ -207,7 +212,9 @@ public class Ejercicios {
                 precioBocadillo,costeBocadillos,total,costePersona);
     }
 
+
     public static void ejercicio10(){
+
 
         System.out.println("Introduce las decenas de millar");
         int decenaDeMillar = lectorTeclado.nextInt();
@@ -222,6 +229,7 @@ public class Ejercicios {
         System.out.printf("Numero introducido: %d%d%d%d%d",decenaDeMillar,unidadesDeMillar,decenas,centenas,unidades);
     }
 
+
     public static void ejercicio11(){
         System.out.println("Escribe un numero entero entre 0 y 100");
         int numero = lectorTeclado.nextInt();
@@ -230,7 +238,9 @@ public class Ejercicios {
         par = numero > 50;
         System.out.println("Mayor que 50: "+par);
 
+
     }
+
 
     public static void ejercicio12(){
         System.out.println("Escribe una palabra");
@@ -246,7 +256,9 @@ public class Ejercicios {
         boolean distincion = !igualdad;
         System.out.println("Son distintas: "+distincion);
 
+
     }
+
 
     public static void ejercicio13(){
         System.out.println("Escribe un numero entre 0 y 9");
@@ -261,6 +273,7 @@ public class Ejercicios {
         System.out.println("Son iguales o la diferencia entre el primero y el segundo es menor que 2: "+igualesDiferencia);
     }
 
+
     public static void ejercicio14(){
         System.out.println("Introduce tu edad");
         int edad = lectorTeclado.nextInt();
@@ -271,6 +284,7 @@ public class Ejercicios {
         boolean requisitos = ((edad>40) && (5<=nivelEstudios && nivelEstudios>=8) && (ingresos<15000));
         System.out.println("Mas de 40 años y estudios entre 5 y 8 y gana menos de 15000: "+requisitos);
     }
+
 
     public static void ejercicio15(){
         System.out.println("Introduce un numero entero");
@@ -285,5 +299,7 @@ public class Ejercicios {
         System.out.println("El resultado es: "+numero);
     }
 
+
 }
+
 
