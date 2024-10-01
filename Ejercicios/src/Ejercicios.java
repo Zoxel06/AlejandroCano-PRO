@@ -195,35 +195,37 @@ public class Ejercicios {
         float costeBebidas = bebidas * precioBebida;
         float costeBocadillos = bocadillos * precioBocadillo;
         float total = costeBebidas + costeBocadillos;
+        float costePersona = total / alumnos;
         System.out.printf("ARTICULO     CANTIDAD   PRECIO   COSTE\n" +
                         "========     ========  ========  ======\n" +
                         "Bebida             %d      %.2f     %.2f\n" +
                         "Bocadillo          %d      %.2f    %.2f\n" +
                         "                                 ======\n" +
                         "TOTAL                             %.2f\n" +
+                        "P.Persona                         %.2f\n"+
                         "_______________________________________",bebidas,precioBebida,costeBebidas,bocadillos,
-                precioBocadillo,costeBocadillos,total);
+                precioBocadillo,costeBocadillos,total,costePersona);
     }
 
     public static void ejercicio10(){
 
-        System.out.println("Introduce las decenas de mil");
-        int decenaDeMil = lectorTeclado.nextInt();
-        System.out.println("Introduce las unidades de mil");
-        int unidadesDeMil = lectorTeclado.nextInt();
+        System.out.println("Introduce las decenas de millar");
+        int decenaDeMillar = lectorTeclado.nextInt();
+        System.out.println("Introduce las unidades de millar");
+        int unidadesDeMillar = lectorTeclado.nextInt();
         System.out.println("Introduce las centenas");
         int centenas = lectorTeclado.nextInt();
         System.out.println("Introduce las decenas");
         int decenas = lectorTeclado.nextInt();
         System.out.println("Introduce las unidades");
         int unidades = lectorTeclado.nextInt();
-        System.out.printf("Numero introducido: %d%d%d%d%d",decenaDeMil,unidadesDeMil,decenas,centenas,unidades);
+        System.out.printf("Numero introducido: %d%d%d%d%d",decenaDeMillar,unidadesDeMillar,decenas,centenas,unidades);
     }
 
     public static void ejercicio11(){
         System.out.println("Escribe un numero entero entre 0 y 100");
         int numero = lectorTeclado.nextInt();
-        boolean par = (numero%2)==0;
+        boolean par = numero%2==0;
         System.out.println("Par: "+par);
         par = numero > 50;
         System.out.println("Mayor que 50: "+par);
@@ -233,12 +235,14 @@ public class Ejercicios {
     public static void ejercicio12(){
         System.out.println("Escribe una palabra");
         String palabra1 = lectorTeclado.nextLine();
-        System.out.println("Escribe una palabra");
+        System.out.println("Escribe otra palabra");
         String palabra2 = lectorTeclado.nextLine();
         boolean igualdad = palabra1.equals(palabra2);
+        // si la primera palabra fuera con una mayuscula y la segunda entera en minuscula se usaria equalsIgnoreCase
+        // para que las compare e "iguale" las dos ignorando que tengan mayusculas o minusculas
         System.out.println("Son iguales: "+igualdad);
-        boolean tamaño = palabra1.compareTo(palabra2)<0;
-        System.out.println("La primera es menor que la segunda: "+igualdad);
+        boolean tamaño = palabra1.length() < palabra2.length();
+        System.out.println("La primera es menor que la segunda: "+tamaño);
         boolean distincion = !igualdad;
         System.out.println("Son distintas: "+distincion);
 
@@ -249,15 +253,12 @@ public class Ejercicios {
         int n1 = lectorTeclado.nextInt();
         System.out.println("Escribe un numero entre 0 y 9");
         int n2 = lectorTeclado.nextInt();
-        boolean parImpar = ((n1%2)==0) && ((n2%1)==0);
+        boolean parImpar = n1%2==0 && n2%2!=0;
         System.out.println("El primero es par y el segundo impar: "+parImpar);
         boolean inferiorSuperior = ((n1 > (n2 * 2)) && (n1 < 8));
         System.out.println("El primero es superior al doble del segundo e inferior a 8: "+inferiorSuperior);
-        boolean igualesDiferencia = ((n1==n2) | Math.abs(n2-n1)<2);
-        System.out.println("Son iguales o la diferencia entre el primero y el segundo es menor que 2: "+!igualesDiferencia);
-        //no entiendo por qué la ultima tiene que ser true si ni son iguales ni la diferencia entre el primero y el segundo
-        //es menor que 2, debería ser false en cualquier caso, pero yo pongo el ! para que la respuesta sea lo contrario
-        //y de true en vez de false
+        boolean igualesDiferencia = ((n1==n2) || Math.abs(n2-n1)<2);
+        System.out.println("Son iguales o la diferencia entre el primero y el segundo es menor que 2: "+igualesDiferencia);
     }
 
     public static void ejercicio14(){
@@ -275,15 +276,14 @@ public class Ejercicios {
         System.out.println("Introduce un numero entero");
         int numero = lectorTeclado.nextInt();
         numero += 5;
-        System.out.println("Incrementar 5 unidades: "+numero);
+        System.out.println("El resultado es: "+numero);
         numero -= 3;
-        System.out.println("Decrementar 3 unidades: "+numero);
+        System.out.println("El resultado es: "+numero);
         numero *= 10;
-        System.out.println("Multiplicar por 10: "+numero);
+        System.out.println("El resultado es: "+numero);
         numero /= 2;
-        System.out.println("Dividir entre 2: "+numero);
+        System.out.println("El resultado es: "+numero);
     }
 
 }
-
 
