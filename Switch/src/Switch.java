@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Entrada {
+public class Switch {
     static Scanner scanner = new Scanner (System.in);
     public static void main(String[] args){
         int numero = 6;
