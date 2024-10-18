@@ -1,4 +1,4 @@
-public class Entrada {
+public class If {
     public static void main(String[] args) {
         String mensaje = null;
         int nota = 6;

@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Ejercicio1 {
+public class EjerciciosIf {
     static Scanner lectorTeclado = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -37,23 +37,23 @@ public class Ejercicio1 {
         }
         System.out.println("El nuevo valor del numero es: "+a);
 
-        }
+    }
 
-        public static void ejercicio3(){
+    public static void ejercicio3(){
         int a = lectorTeclado.nextInt();
-         if (a<0) {
-             System.out.println("Negativo");
-         }
-         else if (a<10) {
-             System.out.println("1 digito");
-         }
-         else if (a<100) {
-             System.out.println("2 digitos");
-         }
-         else if (a<1000) {
-             System.out.println("3 digitos");
-         }
-
-         }
+        if (a<0) {
+            System.out.println("Negativo");
         }
+        else if (a<10) {
+            System.out.println("1 digito");
+        }
+        else if (a<100) {
+            System.out.println("2 digitos");
+        }
+        else if (a<1000) {
+            System.out.println("3 digitos");
+        }
+
+    }
+}
 
