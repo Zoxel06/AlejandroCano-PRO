@@ -93,13 +93,13 @@ public class EjerciciosWhile {
     }
 
     public static void ejercicio2() {
-        System.out.println("Introduce el primer numero");
+        System.out.println("Introduce el primer numero entre 0 y 100");
         int n1 = scanner.nextInt();
-        System.out.println("Introduce el segundo numero");
+        System.out.println("Introduce el segundo numero entre 0 y 100");
         int n2 = scanner.nextInt();
         do {
-            n1 *
-        } while ()
+
+        } while ();
     }
 
     public static void ejercicio3() {
