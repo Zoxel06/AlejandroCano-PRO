@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b887575-43ac-472c-9b7a-6b1021a0f410" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Switch/src/EjerciciosIf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Switch/src/If.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Switch/src/While.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ejercicio1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Estructuras control/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Estructuras control/src/Entrada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alejandro Cano 29-10-24/src/Ejercicio1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alejandro Cano 29-10-24/src/Ejercicio2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alejandro Cano 29-10-24/src/Ejercicio3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alejandro Cano 29-10-24/src/Ejercicio4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Array/src/PrácticaClaseArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Array/src/TeoriaArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicios Arrays/src/Ejercicios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Simulacro examen tema 3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Simulacro examen tema 3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Simulacro examen tema 3/SimulacroExamen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Simulacro examen tema 3/SimulacroExamen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
