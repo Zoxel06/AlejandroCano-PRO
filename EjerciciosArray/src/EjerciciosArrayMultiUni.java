@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class EjerciciosArrayMultiUni {
@@ -10,10 +11,11 @@ public class EjerciciosArrayMultiUni {
         //ejercicio3();
         //ejercicio4();
         //ejercicio5();
-        ejercicio6();
-        //ejercicio7();
+        //ejercicio6();
+        //ejercicio7_1();
+        //ejercicio7_2();
         //ejercicio8();
-        //ejercicio9();
+        ejercicio9();
     }
 
 
@@ -104,7 +106,6 @@ public class EjerciciosArrayMultiUni {
 
 
     public static void ejercicio4() {
-
 
         int longitud = 0;
 
@@ -197,10 +198,10 @@ public class EjerciciosArrayMultiUni {
         do {
             System.out.println("Introduce el numero maximo que quieres que tenga el array");
             numeroMax = scanner.nextInt();
-            if (numeroMax < longitud){
+            if (numeroMax < longitud) {
                 System.out.println("El numero maximo no puede ser menor que la longitud del array");
             }
-        }while (numeroMax < longitud);
+        } while (numeroMax < longitud);
 
 
         System.out.println("Ahora rellena el array");
@@ -214,7 +215,8 @@ public class EjerciciosArrayMultiUni {
 
     }
 
-    public static void ejercicio7() {
+
+    public static void ejercicio7_1() {
 
         char[] abecedario = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
@@ -227,6 +229,11 @@ public class EjerciciosArrayMultiUni {
     }
 
 
+    public static void ejercicio7_2() {
+
+    }
+
+
     public static void ejercicio8() {
 
     }
@@ -234,6 +241,137 @@ public class EjerciciosArrayMultiUni {
 
     public static void ejercicio9() {
 
+        int opcion = 0;
+        int[] numeros = null;
+
+        do {
+            System.out.println("1. Crear array");
+            System.out.println("2. Rellenar aleatorios");
+            System.out.println("3. Rellenar consola");
+            System.out.println("4. Ordenar array");
+            System.out.println("5. Clonar array");
+            System.out.println("6. Mover izquierda");
+            System.out.println("7. Mover derecha");
+            System.out.println("8. Mover por pares");
+            System.out.println("9. Invertir array");
+            System.out.println("10. Imprimir array");
+            System.out.println("11. Salir");
+
+            System.out.println("Elige una opcion");
+            opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("¿Cuantas posiciones quieres reservar?");
+                    int posiciones = scanner.nextInt();
+                    numeros = new int[posiciones];
+                    System.out.println("Arrau creado correctamente");
+                    break;
+
+                case 2:
+                    if (numeros != null) {
+                        System.out.println("Array rellenado con aleatorios");
+                        for (int i = 0; i < numeros.length; i++) {
+                            numeros[i] = (int) (Math.random() * 100);
+                        }
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 3:
+                    if (numeros != null) {
+                        for (int i = 0; i < numeros.length; i++) {
+                            System.out.println("Introduce el numero de la posicion " + i);
+                            numeros[i] = scanner.nextInt();
+                        }
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 4:
+                    if (numeros != null) {
+                        Arrays.sort(numeros);
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("¿Cual es la nueva longitud del array?");
+                    int nuevaLongitud = scanner.nextInt();
+                    numeros = Arrays.copyOf(numeros, nuevaLongitud);
+                    break;
+
+                case 6:
+                    if (numeros != null) {
+
+                        int temporal = numeros[0];
+                        for (int i = 0; i < numeros.length - 1; i++) {
+                            numeros[i] = numeros[i + 1];
+                        }
+                        numeros[numeros.length - 1] = temporal;
+
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 7:
+                    if (numeros != null) {
+
+                        int temporal = numeros[numeros.length - 1];
+                        for (int i = numeros.length - 1; i > 0; i--) {
+                            numeros[i] = numeros[i - 1];
+                        }
+                        numeros[0] = temporal;
+
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 8:
+                    if (numeros != null) {
+
+                        for (int i = 0; i < numeros.length; i += 2) {
+                            int temporal = numeros[i];
+                            numeros[i] = numeros[i + 1];
+                            numeros[i + 1] = temporal;
+                        }
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 9:
+                    if (numeros != null) {
+                        for (int i = 0; i < numeros.length/2; i++) {
+                            int temporal = numeros[i];
+                            numeros[i] = numeros[numeros.length-1-i];
+                            numeros[numeros.length-1-i] = temporal;
+                        }
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 10:
+                    if (numeros != null) {
+                        for (int item : numeros) {
+                            System.out.print(item + "\t");
+                        }
+                        System.out.println();
+                    } else {
+                        System.out.println("Imposible, inicia el array antes");
+                    }
+                    break;
+
+                case 11:
+                    break;
+            }
+        } while (opcion != 11);
     }
 
 }
