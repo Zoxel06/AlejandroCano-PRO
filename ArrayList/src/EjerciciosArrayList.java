@@ -10,7 +10,7 @@ public class EjerciciosArrayList {
 
     public static void main(String[] args) {
         ejercicio1();
-        ejercicio2();
+        //ejercicio2();
     }
 
     public static void ejercicio1(){
@@ -20,7 +20,16 @@ public class EjerciciosArrayList {
     }
 
     public static void agregarPalabras(){
-        
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
+        listaPalabras.add("Hola");
     }
 
     public static void ejercicio2(){
