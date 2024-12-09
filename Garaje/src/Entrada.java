@@ -9,6 +9,7 @@ public class Entrada {
         garaje.anadirCoches("Porsche", "911", 300, "1234C");
         garaje.anadirCoches("Formula", "1", 500, "1234E");
         garaje.mostrarCoches();
+
     }
 
 }
