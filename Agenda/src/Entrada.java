@@ -38,7 +38,7 @@ public class Entrada {
                     }
                     break;
                 case 2:
-                    switch (agenda.buscarPersona())
+
                     break;
                 case 3:
 

@@ -14,7 +14,7 @@ public class TeoriaArraylist {
         listaNumeros.set(1,33); //cambia el numero de la posicion 1 a "33"
 
         listaNumeros.remove(0);
-
+        listaNumeros.get(0); // obtener una posicion
 
         ArrayList listaPalabras = new ArrayList();
         listaPalabras.add("hola");
