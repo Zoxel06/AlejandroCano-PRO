@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collections;
+
 public class Coche {
 
     // propiedades
@@ -56,6 +58,7 @@ public class Coche {
         System.out.println("El n bastidor es: " + bastidor);
         System.out.println("La matricula es: " + matricula);
         System.out.println("El precio es: " + precio);
+
     }
 
     // metodos especiales
