@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class Coche {
@@ -7,7 +8,7 @@ public class Coche {
     // propiedades
     private String marca ,modelo, color, matricula, bastidor;
     private double precio;
-    private int cv, par;
+    private int cv, par,km;
 
     // constructores --> por defecto tengo el constructor vacio sin escribir nada
     public Coche(){
@@ -46,6 +47,18 @@ public class Coche {
         this.cv = cv;
         this.precio = (precio * 1.15);
         par = (int) Math.pow(cv * 2,2);
+    }
+
+    public Coche(String marca, String modelo, String matricula, int cv, int km){
+        this.marca = marca;
+        this.modelo = modelo;
+        this.matricula = matricula;
+        this.cv = cv;
+        this.km = km;
+    }
+
+    public void agregarCoche(){
+
     }
 
     // metodos
