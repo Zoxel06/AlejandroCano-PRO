@@ -2,16 +2,17 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Coche {
-
+    static Scanner scanner = new Scanner(System.in);
     // propiedades
-    private String marca ,modelo, color, matricula, bastidor;
+    private String marca, modelo, color, matricula, bastidor;
     private double precio;
-    private int cv, par,km;
+    private int cv, par, km;
 
     // constructores --> por defecto tengo el constructor vacio sin escribir nada
-    public Coche(){
+    /*public Coche() {
         // inicializar el objeto y por ende todos los atributos de este
         // para poder ejecutar funciones cuando el objeto se crea
         matricula = "sin definir";
@@ -21,24 +22,24 @@ public class Coche {
         color = "sin definir";
     }
 
-    public Coche(String marca, String modelo, String color){
+    public Coche(String marca, String modelo, String color) {
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
     }
 
-    public Coche(String marca, String modelo, int cv){
+    public Coche(String marca, String modelo, int cv) {
         this.marca = marca;
         this.modelo = modelo;
         this.cv = cv;
-        par = (int) Math.pow(cv * 2,2);
+        par = (int) Math.pow(cv * 2, 2);
     }
 
     // inicializo el coche con marca modelo color matricula cv precio bastidor
-        // par --> calcula
-        // precio --> lo que me dan + 15%
+    // par --> calcula
+    // precio --> lo que me dan + 15%
 
-    public Coche(String marca, String modelo, String color, String matricula, int cv, double precio, String bastidor){
+    public Coche(String marca, String modelo, String color, String matricula, int cv, double precio, String bastidor) {
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
@@ -46,10 +47,11 @@ public class Coche {
         this.bastidor = bastidor;
         this.cv = cv;
         this.precio = (precio * 1.15);
-        par = (int) Math.pow(cv * 2,2);
+        par = (int) Math.pow(cv * 2, 2);
     }
+    */
 
-    public Coche(String marca, String modelo, String matricula, int cv, int km){
+    public Coche(String marca, String modelo, String matricula, int cv, int km) {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
@@ -57,12 +59,9 @@ public class Coche {
         this.km = km;
     }
 
-    public void agregarCoche(){
-
-    }
 
     // metodos
-    public void mostrarDatos(){
+    public void mostrarDatos() {
         System.out.println("La marca es: " + marca);
         System.out.println("El modelo es: " + modelo);
         System.out.println("Los cv son: " + cv);
@@ -105,11 +104,15 @@ public class Coche {
         return par;
     }
 
-    public String getMarca(){
+    public int getKm() {
+        return km;
+    }
+
+    public String getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca){
+    public void setMarca(String marca) {
         this.marca = marca;
     }
 
@@ -139,5 +142,9 @@ public class Coche {
 
     public void setPar(int par) {
         this.par = par;
+    }
+
+    public void setKm(int km) {
+        this.km += km;
     }
 }

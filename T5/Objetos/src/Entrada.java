@@ -1,8 +1,11 @@
 import model.Coche;
 
-public class Entrada {
+import java.util.Scanner;
 
+public class Entrada {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+        /*
         Coche coche1 = new Coche();
         Coche coche2 = new Coche("Ford", "Focus", "gris");
         Coche coche3 = new Coche("Opel", "Corsa", 100);
@@ -21,5 +24,8 @@ public class Entrada {
         coche3.mostrarDatos();
         System.out.println("\nLos datos del coche 4 son:");
         coche4.mostrarDatos();
+         */
+
+
     }
 }
