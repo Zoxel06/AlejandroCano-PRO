@@ -1,18 +1,18 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Coche {
-    static Scanner scanner = new Scanner(System.in);
+
     // propiedades
     private String marca, modelo, color, matricula, bastidor;
     private double precio;
     private int cv, par, km;
+    // puedo acceder a estos atributos privados gracias a los getter y los setter!!
 
     // constructores --> por defecto tengo el constructor vacio sin escribir nada
-    /*public Coche() {
+
+    public Coche() {
         // inicializar el objeto y por ende todos los atributos de este
         // para poder ejecutar funciones cuando el objeto se crea
         matricula = "sin definir";
@@ -49,14 +49,12 @@ public class Coche {
         this.precio = (precio * 1.15);
         par = (int) Math.pow(cv * 2, 2);
     }
-    */
 
-    public Coche(String marca, String modelo, String matricula, int cv, int km) {
+    public Coche(String marca, String modelo, String matricula, int cv) {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
         this.cv = cv;
-        this.km = km;
     }
 
 
@@ -112,15 +110,7 @@ public class Coche {
         return marca;
     }
 
-<<<<<<< Updated upstream
     public void setMarca(String marca) {
-=======
-    public int getKm() {
-        return km;
-    }
-
-    public void setMarca(String marca){
->>>>>>> Stashed changes
         this.marca = marca;
     }
 
@@ -153,12 +143,9 @@ public class Coche {
     }
 
     public void setKm(int km) {
-<<<<<<< Updated upstream
         this.km += km;
     }
-=======
-        this.km = km;
-    }
 
->>>>>>> Stashed changes
 }
+
+

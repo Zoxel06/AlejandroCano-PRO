@@ -1,16 +1,13 @@
-import model.Coche;
-
 import java.util.Scanner;
 
 public class Entrada {
-<<<<<<< Updated upstream
+
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-=======
-static Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) {
 
->>>>>>> Stashed changes
+
+
+
         /*
         Coche coche1 = new Coche();
         Coche coche2 = new Coche("Ford", "Focus", "gris");
@@ -30,15 +27,8 @@ static Scanner scanner = new Scanner(System.in);
         coche3.mostrarDatos();
         System.out.println("\nLos datos del coche 4 son:");
         coche4.mostrarDatos();
-<<<<<<< Updated upstream
          */
 
-=======
-
-         */
-
-        System.out.println();
->>>>>>> Stashed changes
 
     }
 }
