@@ -112,7 +112,15 @@ public class Coche {
         return marca;
     }
 
+<<<<<<< Updated upstream
     public void setMarca(String marca) {
+=======
+    public int getKm() {
+        return km;
+    }
+
+    public void setMarca(String marca){
+>>>>>>> Stashed changes
         this.marca = marca;
     }
 
@@ -145,6 +153,12 @@ public class Coche {
     }
 
     public void setKm(int km) {
+<<<<<<< Updated upstream
         this.km += km;
     }
+=======
+        this.km = km;
+    }
+
+>>>>>>> Stashed changes
 }
