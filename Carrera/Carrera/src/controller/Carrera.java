@@ -28,12 +28,45 @@ public class Carrera {
     }
 
     public void inscribirParticipante(Coche coche) {
+
+        boolean apto = true;
+
         if (listaCoches.size() == 8 || coche.getCv() > 300) {
             System.out.println("No puede inscribirse");
-
+            apto = false;
         } else {
-            System.out.println("Inscripción realizada correctamente");
-            listaCoches.add(coche);
+
+            for (int i = 0; i < listaCoches.size(); i++) {
+                if (listaCoches.get(i).getMatricula().equalsIgnoreCase(coche.getMatricula())) {
+                    System.out.println("Imposible, matricula duplicada");
+                    apto = false;
+                }
+            }
+            if (apto) {
+                System.out.println("Inscripción realizada correctamente");
+                listaCoches.add(coche);
+            }
+        }
+    }
+
+
+    public void descalificarParticipante(String matricula) {
+        if (listaCoches.contains(matricula)) {
+            for (int i = 0; i < listaCoches.size(); i++) {
+                listaCoches.remove(listaCoches.get(2).equals(matricula));
+                System.out.println("Participante descalificado correctamente");
+            }
+        } else {
+            System.out.println("No se ha inscrito ningun coche con esta matricula");
+        }
+
+    }
+
+    public void mostrarParticipantes() {
+        for (int i = 0; i < listaCoches.size(); i++) {
+            System.out.println("Participante " + (i + 1) + ": " + listaCoches.get(i).getMarca() +
+                    " " + listaCoches.get(i).getModelo() + " " + listaCoches.get(i).getMatricula()
+                    + " " + listaCoches.get(i).getCv());
         }
     }
 
