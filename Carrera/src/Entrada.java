@@ -26,6 +26,12 @@ public class Entrada {
         carrera1.descalificarParticipante("345C");
 
         carrera1.mostrarParticipantes();
+
+        carrera1.iniciarCarrera();
+
+        carrera1.ordenarParticipantes();
+
+        carrera1.mostrarCadaVuelta();
     }
 
 }

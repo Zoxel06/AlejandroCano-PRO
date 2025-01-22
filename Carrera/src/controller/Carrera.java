@@ -3,6 +3,7 @@ package controller;
 import model.Coche;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -67,6 +68,38 @@ public class Carrera {
             System.out.println("Participante " + (i + 1) + ": " + listaCoches.get(i).getMarca() +
                     " " + listaCoches.get(i).getModelo() + " " + listaCoches.get(i).getMatricula()
                     + " " + listaCoches.get(i).getCv());
+        }
+    }
+
+    public void iniciarCarrera() {
+        for (Coche item : listaCoches) {
+            int kmAleatorio = (int) ((Math.random() * 51) + 50);
+            item.setKm(kmAleatorio);
+        }
+    }
+
+
+    public void ordenarParticipantes(){
+        listaCoches.sort(new Comparator<Coche>() {
+            @Override
+            public int compare(Coche o1, Coche o2) {
+                if (o1.getKm() > o2.getKm()) {
+                    return -1;
+                } else if (o1.getKm() < o2.getKm()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+    }
+
+
+    public void mostrarCadaVuelta() {
+        for (int i = 0; i < vueltas; i++) {
+            System.out.println((i+1) + ". " + listaCoches.get(i).getMarca() + " " + listaCoches.get(i).getModelo() +
+                    " " + listaCoches.get(i).getMatricula() + " " + listaCoches.get(i).getCv() + " " +
+                    listaCoches.get(i).getKm());
         }
     }
 
