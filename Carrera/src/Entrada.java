@@ -32,6 +32,10 @@ public class Entrada {
         carrera1.ordenarParticipantes();
 
         carrera1.mostrarCadaVuelta();
+
+        carrera1.mostrarClasificacion();
+
+        carrera1.mostrarGanador();
     }
 
 }

@@ -29,7 +29,6 @@ public class Carrera {
     }
 
     public void inscribirParticipante(Coche coche) {
-
         boolean apto = true;
 
         if (listaCoches.size() == 8 || coche.getCv() > 300) {
@@ -52,6 +51,7 @@ public class Carrera {
 
 
     public void descalificarParticipante(String matricula) {
+        System.out.println();
         if (listaCoches.contains(matricula)) {
             for (int i = 0; i < listaCoches.size(); i++) {
                 listaCoches.remove(listaCoches.get(2).equals(matricula));
@@ -64,6 +64,7 @@ public class Carrera {
     }
 
     public void mostrarParticipantes() {
+        System.out.println();
         for (int i = 0; i < listaCoches.size(); i++) {
             System.out.println("Participante " + (i + 1) + ": " + listaCoches.get(i).getMarca() +
                     " " + listaCoches.get(i).getModelo() + " " + listaCoches.get(i).getMatricula()
@@ -72,14 +73,16 @@ public class Carrera {
     }
 
     public void iniciarCarrera() {
-        for (Coche item : listaCoches) {
-            int kmAleatorio = (int) ((Math.random() * 51) + 50);
-            item.setKm(kmAleatorio);
+        for (int i = 0; i <vueltas; i++) {
+            for (Coche item : listaCoches) {
+                int kmAleatorio = (int) ((Math.random() * 51) + 50);
+                item.setKm(kmAleatorio);
+
+            }
         }
     }
 
-
-    public void ordenarParticipantes(){
+    public void ordenarParticipantes() {
         listaCoches.sort(new Comparator<Coche>() {
             @Override
             public int compare(Coche o1, Coche o2) {
@@ -94,14 +97,36 @@ public class Carrera {
         });
     }
 
-
     public void mostrarCadaVuelta() {
+        System.out.println();
         for (int i = 0; i < vueltas; i++) {
-            System.out.println((i+1) + ". " + listaCoches.get(i).getMarca() + " " + listaCoches.get(i).getModelo() +
-                    " " + listaCoches.get(i).getMatricula() + " " + listaCoches.get(i).getCv() + " " +
-                    listaCoches.get(i).getKm());
+            System.out.println("Vuelta " + (i + 1) + ":");
+            for (int j = 0; j < listaCoches.size(); j++) {
+                System.out.println((j + 1) + "º: " + listaCoches.get(j).getMarca() + " " + listaCoches.get(j).getModelo() +
+                        " " + listaCoches.get(j).getMatricula() + " " + listaCoches.get(j).getCv() + "cv " +
+                        listaCoches.get(j).getKm() + "km");
+            }
         }
     }
+
+    public void mostrarGanador(){
+        System.out.println();
+        System.out.println("El ganador es el participante: " + listaCoches.get(0).getMarca() + " " + listaCoches.get(0).getModelo() +
+                " " + listaCoches.get(0).getMatricula() + " " + listaCoches.get(0).getCv() + "cv " +
+                listaCoches.get(0).getKm() + "km");
+    }
+
+    public void mostrarClasificacion(){
+        System.out.println();
+        System.out.println("La clasificacion final es:");
+        for (int j = 0; j < listaCoches.size(); j++) {
+            System.out.println((j + 1) + "º: " + listaCoches.get(j).getMarca() + " " + listaCoches.get(j).getModelo() +
+                    " " + listaCoches.get(j).getMatricula() + " " + listaCoches.get(j).getCv() + "cv " +
+                    listaCoches.get(j).getKm() + "km");
+        }
+    }
+
+
 
 
     public ArrayList<Coche> getListaCoches() {

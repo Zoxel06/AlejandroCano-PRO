@@ -29,7 +29,7 @@ public class Coche {
     }
 
     public void setKm(int km) {
-        this.km = km;
+        this.km += km;
     }
 
     public String getMarca() {
