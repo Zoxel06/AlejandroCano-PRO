@@ -21,12 +21,6 @@ public class Carrera {
         listaCoches = new ArrayList<Coche>();
     }
 
-    public void crearCarrera() {
-        System.out.println("Como se va a llamar la carrera?");
-        nombreCarrera = scanner.next();
-        System.out.println("Cuantas vueltas va a tener la carrera?");
-        vueltas = scanner.nextInt();
-    }
 
     public void inscribirParticipante(Coche coche) {
         boolean apto = true;
@@ -73,19 +67,19 @@ public class Carrera {
     }
 
     public void iniciarCarrera() {
-        if (listaCoches.size() == 8 && vueltas > 0){
-            for (int i = 0; i <vueltas; i++) {
+        if (listaCoches.size() == 8 && vueltas > 0) {
+            for (int i = 0; i < vueltas; i++) {
                 for (Coche item : listaCoches) {
                     int kmAleatorio = (int) ((Math.random() * 51) + 50);
                     item.setKm(kmAleatorio);
                 }
                 System.out.println();
-                System.out.println("Vuelta " + (i+1) + ":");
+                System.out.println("Vuelta " + (i + 1) + ":");
                 mostrarClasificacion();
                 try {
                     Thread.sleep(2000);
-                }catch (InterruptedException e){
-                    throw  new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
@@ -108,7 +102,7 @@ public class Carrera {
     }
 
 
-    public void mostrarGanador(){
+    public void mostrarGanador() {
         ordenarParticipantes();
         System.out.println();
         System.out.println("El ganador es el participante: " + listaCoches.get(0).getMarca() + " " + listaCoches.get(0).getModelo() +
@@ -116,7 +110,7 @@ public class Carrera {
                 listaCoches.get(0).getKm() + "km");
     }
 
-    public void mostrarClasificacion(){
+    public void mostrarClasificacion() {
         ordenarParticipantes();
         System.out.println("La clasificacion es:");
         for (int i = 0; i < listaCoches.size(); i++) {
@@ -125,8 +119,6 @@ public class Carrera {
                     listaCoches.get(i).getKm() + "km");
         }
     }
-
-
 
 
     public ArrayList<Coche> getListaCoches() {

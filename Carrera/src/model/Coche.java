@@ -5,7 +5,7 @@ public class Coche {
     private int cv, km;
 
 
-    public Coche(String marca, String modelo, String matricula, int cv){
+    public Coche(String marca, String modelo, String matricula, int cv) {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
