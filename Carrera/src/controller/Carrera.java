@@ -73,11 +73,20 @@ public class Carrera {
     }
 
     public void iniciarCarrera() {
-        for (int i = 0; i <vueltas; i++) {
-            for (Coche item : listaCoches) {
-                int kmAleatorio = (int) ((Math.random() * 51) + 50);
-                item.setKm(kmAleatorio);
-
+        if (listaCoches.size() == 8 && vueltas > 0){
+            for (int i = 0; i <vueltas; i++) {
+                for (Coche item : listaCoches) {
+                    int kmAleatorio = (int) ((Math.random() * 51) + 50);
+                    item.setKm(kmAleatorio);
+                }
+                System.out.println();
+                System.out.println("Vuelta " + (i+1) + ":");
+                mostrarClasificacion();
+                try {
+                    Thread.sleep(2000);
+                }catch (InterruptedException e){
+                    throw  new RuntimeException(e);
+                }
             }
         }
     }
@@ -95,21 +104,12 @@ public class Carrera {
                 }
             }
         });
+
     }
 
-    public void mostrarCadaVuelta() {
-        System.out.println();
-        for (int i = 0; i < vueltas; i++) {
-            System.out.println("Vuelta " + (i + 1) + ":");
-            for (int j = 0; j < listaCoches.size(); j++) {
-                System.out.println((j + 1) + "º: " + listaCoches.get(j).getMarca() + " " + listaCoches.get(j).getModelo() +
-                        " " + listaCoches.get(j).getMatricula() + " " + listaCoches.get(j).getCv() + "cv " +
-                        listaCoches.get(j).getKm() + "km");
-            }
-        }
-    }
 
     public void mostrarGanador(){
+        ordenarParticipantes();
         System.out.println();
         System.out.println("El ganador es el participante: " + listaCoches.get(0).getMarca() + " " + listaCoches.get(0).getModelo() +
                 " " + listaCoches.get(0).getMatricula() + " " + listaCoches.get(0).getCv() + "cv " +
@@ -117,12 +117,12 @@ public class Carrera {
     }
 
     public void mostrarClasificacion(){
-        System.out.println();
-        System.out.println("La clasificacion final es:");
-        for (int j = 0; j < listaCoches.size(); j++) {
-            System.out.println((j + 1) + "º: " + listaCoches.get(j).getMarca() + " " + listaCoches.get(j).getModelo() +
-                    " " + listaCoches.get(j).getMatricula() + " " + listaCoches.get(j).getCv() + "cv " +
-                    listaCoches.get(j).getKm() + "km");
+        ordenarParticipantes();
+        System.out.println("La clasificacion es:");
+        for (int i = 0; i < listaCoches.size(); i++) {
+            System.out.println((i + 1) + "º: " + listaCoches.get(i).getMarca() + " " + listaCoches.get(i).getModelo() +
+                    " " + listaCoches.get(i).getMatricula() + " " + listaCoches.get(i).getCv() + "cv " +
+                    listaCoches.get(i).getKm() + "km");
         }
     }
 

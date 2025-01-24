@@ -22,6 +22,7 @@ public class Entrada {
         carrera1.inscribirParticipante(new Coche("Marca 7","Modelo 7","789G",222));
         carrera1.inscribirParticipante(new Coche("Marca 8","Modelo 8","890H",320));
         carrera1.inscribirParticipante(new Coche("Marca 9","Modelo 9","890I",120));
+        carrera1.inscribirParticipante(new Coche("Marca 10","Modelo 10","901J",233));
 
         carrera1.descalificarParticipante("345C");
 
@@ -29,13 +30,11 @@ public class Entrada {
 
         carrera1.iniciarCarrera();
 
-        carrera1.ordenarParticipantes();
-
-        carrera1.mostrarCadaVuelta();
+        carrera1.mostrarGanador();
 
         carrera1.mostrarClasificacion();
 
-        carrera1.mostrarGanador();
+
     }
 
 }
