@@ -35,7 +35,10 @@ static Scanner scanner = new Scanner(System.in);
         p2.mostrarDatos();
         p3.mostrarDatos();
 
-        System.out.println("El IMC es:" + p1.calcularIMC());
+        System.out.println("El IMC de la primera persona es:" + p1.calcularIMC());
 
+        p1.determinarPeso();
+
+        p1.IMCSegunGenero();
     }
 }

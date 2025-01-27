@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Persona {
     static Scanner scanner = new Scanner(System.in);
 
-    private String nombre, apellido, dni;
+    private String nombre, apellido, dni, genero;
     private int edad;
     private double peso, altura;
 
@@ -38,24 +37,63 @@ public class Persona {
     }
 
 
-
-
-
     public void mostrarDatos() {
         System.out.printf("Nombre: %s\nApellido: %s\nDNI: %s\nEdad: %d\nPeso: %.2fkg\nAltura: %.2fm\n"
-                ,nombre,apellido,dni,edad,peso,altura);
+                , nombre, apellido, dni, edad, peso, altura);
         System.out.println();
     }
 
-    public void incrementarEdad(){
+    public void incrementarEdad() {
         System.out.println("Dime cuantos años quieres aumentar");
         int aumento = scanner.nextInt();
-        setEdad(edad+aumento);
+        setEdad(edad + aumento);
     }
 
-    public double calcularIMC(){
-        double imc = peso/Math.pow(altura,altura);
+    public double calcularIMC() {
+        double imc = peso / Math.pow(altura, altura);
         return imc;
+    }
+
+    public void IMCSegunGenero() {
+        System.out.println("Eres hombre o mujer?");
+        genero = scanner.next();
+        if (genero.equalsIgnoreCase("hombre")) {
+            if (peso < 20) {
+                System.out.println("Bajo peso");
+            } else if (peso >= 20 && peso < 27) {
+                System.out.println("Normopeso");
+            } else if (peso >= 27 && peso < 30) {
+                System.out.println("Sobrepeso");
+            } else if (peso >= 30 && peso <= 40) {
+                System.out.println("Obesidad");
+            } else if (peso > 40) {
+                System.out.println("Obesidad mórbida");
+            }
+        } else if (genero.equalsIgnoreCase("mujer")) {
+            if (peso < 20) {
+                System.out.println("Bajo peso");
+            } else if (peso >= 20 && peso < 25) {
+                System.out.println("Normopeso");
+            } else if (peso >= 25 && peso < 30) {
+                System.out.println("Sobrepeso");
+            } else if (peso >= 30 && peso <= 40) {
+                System.out.println("Obesidad");
+            } else if (peso > 40) {
+                System.out.println("Obesidad mórbida");
+            }
+        }
+    }
+
+    public void determinarPeso() {
+        if (peso < 18.5) {
+            System.out.println("Peso inferior al normal");
+        } else if (peso >= 18.5 && peso <= 24.9) {
+            System.out.println("Peso normal");
+        } else if (peso >= 25.0 && peso <= 30) {
+            System.out.println("Peso superior al normal");
+        } else if (peso > 30.0) {
+            System.out.println("Obesidad");
+        }
     }
 
     public String getNombre() {
