@@ -54,47 +54,48 @@ public class Persona {
         return imc;
     }
 
+    public void determinarPeso() {
+        if (calcularIMC() < 18.5) {
+            System.out.println("Peso inferior al normal");
+        } else if (calcularIMC() >= 18.5 && calcularIMC() <= 24.9) {
+            System.out.println("Peso normal");
+        } else if (calcularIMC() >= 25.0 && calcularIMC() <= 30) {
+            System.out.println("Peso superior al normal");
+        } else if (calcularIMC() > 30.0) {
+            System.out.println("Obesidad");
+        }
+    }
+
     public void IMCSegunGenero() {
         System.out.println("Eres hombre o mujer?");
         genero = scanner.next();
         if (genero.equalsIgnoreCase("hombre")) {
-            if (peso < 20) {
+            if (calcularIMC() < 20) {
                 System.out.println("Bajo peso");
-            } else if (peso >= 20 && peso < 27) {
+            } else if (calcularIMC() >= 20 && calcularIMC() < 27) {
                 System.out.println("Normopeso");
-            } else if (peso >= 27 && peso < 30) {
+            } else if (calcularIMC() >= 27 && calcularIMC() < 30) {
                 System.out.println("Sobrepeso");
-            } else if (peso >= 30 && peso <= 40) {
+            } else if (calcularIMC() >= 30 && calcularIMC() <= 40) {
                 System.out.println("Obesidad");
-            } else if (peso > 40) {
+            } else if (calcularIMC() > 40) {
                 System.out.println("Obesidad mórbida");
             }
         } else if (genero.equalsIgnoreCase("mujer")) {
-            if (peso < 20) {
+            if (calcularIMC() < 20) {
                 System.out.println("Bajo peso");
-            } else if (peso >= 20 && peso < 25) {
+            } else if (calcularIMC() >= 20 && calcularIMC() < 25) {
                 System.out.println("Normopeso");
-            } else if (peso >= 25 && peso < 30) {
+            } else if (calcularIMC() >= 25 && calcularIMC() < 30) {
                 System.out.println("Sobrepeso");
-            } else if (peso >= 30 && peso <= 40) {
+            } else if (calcularIMC() >= 30 && calcularIMC() <= 40) {
                 System.out.println("Obesidad");
-            } else if (peso > 40) {
+            } else if (calcularIMC() > 40) {
                 System.out.println("Obesidad mórbida");
             }
         }
     }
 
-    public void determinarPeso() {
-        if (peso < 18.5) {
-            System.out.println("Peso inferior al normal");
-        } else if (peso >= 18.5 && peso <= 24.9) {
-            System.out.println("Peso normal");
-        } else if (peso >= 25.0 && peso <= 30) {
-            System.out.println("Peso superior al normal");
-        } else if (peso > 30.0) {
-            System.out.println("Obesidad");
-        }
-    }
 
     public String getNombre() {
         return nombre;
