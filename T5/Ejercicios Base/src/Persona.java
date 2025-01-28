@@ -8,13 +8,14 @@ public class Persona {
     private double peso, altura;
 
 
-    public Persona(String nombre, String apellido, String dni, int edad, double peso, double altura) {
+    public Persona(String nombre, String apellido, String dni, int edad, double peso, double altura, String genero) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
         this.peso = peso;
         this.altura = altura;
+        this.genero = genero;
     }
 
     public Persona(String nombre, String apellido, String dni, int edad) {
@@ -28,18 +29,20 @@ public class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = "11111111X";
+        this.genero = "sin definir";
     }
 
     public Persona() {
         this.nombre = "sin definir";
         this.apellido = "sin definir";
         this.dni = "11111111X";
+        this.genero = "sin definir";
     }
 
 
     public void mostrarDatos() {
-        System.out.printf("Nombre: %s\nApellido: %s\nDNI: %s\nEdad: %d\nPeso: %.2fkg\nAltura: %.2fm\n"
-                , nombre, apellido, dni, edad, peso, altura);
+        System.out.printf("Nombre: %s\nApellido: %s\nDNI: %s\nEdad: %d\nPeso: %.2fkg\nAltura: %.2fm\nGenero: %s\n"
+                , nombre, apellido, dni, edad, peso, altura, genero);
         System.out.println();
     }
 
@@ -66,9 +69,7 @@ public class Persona {
         }
     }
 
-    public void IMCSegunGenero() {
-        System.out.println("Eres hombre o mujer?");
-        genero = scanner.next();
+    public void determinarPesoGenero() {
         if (genero.equalsIgnoreCase("hombre")) {
             if (calcularIMC() < 20) {
                 System.out.println("Bajo peso");
