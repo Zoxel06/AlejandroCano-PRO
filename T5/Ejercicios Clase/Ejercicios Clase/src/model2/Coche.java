@@ -1,6 +1,8 @@
+package model2;
+
 public class Coche {
 
-    private Motor motor1;
+    private Motor motor;
     private String marca, modelo, matricula;
     private double precioAcumulado;
 
@@ -30,12 +32,12 @@ public class Coche {
 
     }
 
-    public Motor getMotor1() {
-        return motor1;
+    public Motor getMotor() {
+        return motor;
     }
 
-    public void setMotor1(Motor motor1) {
-        this.motor1 = motor1;
+    public void setMotor(Motor motor) {
+        this.motor = motor;
     }
 
     public String getMarca() {

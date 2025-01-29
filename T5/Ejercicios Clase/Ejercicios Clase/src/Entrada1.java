@@ -1,10 +1,10 @@
-import model.Alumno;
-import model.Asignatura;
-import model.Profesor;
+import model1.Alumno;
+import model1.Asignatura;
+import model1.Profesor;
 
 import java.util.ArrayList;
 
-public class Entrada {
+public class Entrada1 {
 
     public static void main(String[] args) {
 

@@ -1,8 +1,9 @@
+package model2;
+
 public class Garaje {
 
 
-    private Coche coche1 = new Coche("Marca 1","Modelo 1", "1234A");
-    private Coche coche2 = new Coche("Marca 2","Modelo 2", "1234B");
+    private Coche coche = new Coche("Marca 1","Modelo 1", "1234A");
 
     private String averia;
     private int numeroCoches;

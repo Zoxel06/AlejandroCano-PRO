@@ -1,3 +1,5 @@
+package model2;
+
 public class Motor {
 
     private int litros, cv;
