@@ -19,7 +19,6 @@ public class Coche {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
-
     }
 
     public boolean hayAveria() {
