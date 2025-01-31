@@ -3,17 +3,17 @@ package model2;
 public class Garaje {
 
 
-    private Coche coche;
+    private Coche cocheActual;
     private String averia;
     private int numeroCoches;
 
     public Garaje(){
     }
 
-    public boolean aceptarCoche(Coche coche, String averia){
-        boolean aceptado = true;
-
-        return aceptado;
+    public void aceptarCoche(Coche coche){
+       if (cocheActual==null){
+           cocheActual = coche;
+       }
     }
 
     public void devolverCoche(Coche coche){
