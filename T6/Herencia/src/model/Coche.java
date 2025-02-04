@@ -11,7 +11,13 @@ public class Coche extends Vehiculo {
 
     @Override
     public void mostrarDatos() {
-        System.out.println("Traccion " + traccion);
         super.mostrarDatos();
+        System.out.println("Traccion " + traccion);
     }
+
+
+    public void metodoCoche(){
+
+    }
+
 }
