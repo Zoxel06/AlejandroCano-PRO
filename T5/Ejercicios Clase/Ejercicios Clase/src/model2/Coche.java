@@ -2,11 +2,15 @@ package model2;
 
 public class Coche {
 
-    private Motor motor;
     private String marca, modelo, matricula;
-    private double precioAcumulado;
+    private Motor motor;
+    private double averias;
 
-    public Coche() {
+    public Coche(String marca, String modelo, String matricula, Motor motor) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.matricula = matricula;
+        this.motor = motor;
     }
 
     public Coche(String marca, String modelo, String matricula) {
@@ -15,28 +19,13 @@ public class Coche {
         this.matricula = matricula;
     }
 
-    public Coche(String marca, String modelo, String matricula, Motor motor) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
-    }
-
-    public boolean hayAveria() {
-        boolean averia = true;
-        return averia;
-    }
-
-    public void acumularAveria(String aceite) {
-        precioAcumulado += (int) ((Math.random() * 401) + 100);
-
-    }
-
-    public Motor getMotor() {
-        return motor;
-    }
-
-    public void setMotor(Motor motor) {
-        this.motor = motor;
+    public void arregar(String tipo, int coste){
+        if (tipo.equalsIgnoreCase("aceite")){
+            motor.setLitrosAceite(motor.getLitrosAceite()+10);
+        } else {
+            motor.setLitrosAceite((int) (motor.getLitrosAceite()+Math.random()*101));
+        }
+        this.averias += coste;
     }
 
     public String getMarca() {
@@ -63,12 +52,19 @@ public class Coche {
         this.matricula = matricula;
     }
 
-    public double getPrecioAcumulado() {
-        return precioAcumulado;
+    public Motor getMotor() {
+        return motor;
     }
 
-    public void setPrecioAcumulado(double precioAcumulado) {
-        this.precioAcumulado = precioAcumulado;
+    public void setMotor(Motor motor) {
+        this.motor = motor;
     }
 
+    public double getAverias() {
+        return averias;
+    }
+
+    public void setAverias(double averias) {
+        this.averias = averias;
+    }
 }

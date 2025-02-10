@@ -2,21 +2,20 @@ package model2;
 
 public class Motor {
 
-    private int litros, cv;
+    private int litrosAceite;
+    private int cv;
 
-    public Motor(){
-    }
-
-    public Motor(int cv){
+    public Motor(int litrosAceite, int cv) {
+        this.litrosAceite = litrosAceite;
         this.cv = cv;
     }
 
-    public int getLitros() {
-        return litros;
+    public int getLitrosAceite() {
+        return litrosAceite;
     }
 
-    public void setLitros(int litros) {
-        this.litros = litros;
+    public void setLitrosAceite(int litrosAceite) {
+        this.litrosAceite = litrosAceite;
     }
 
     public int getCv() {
@@ -26,5 +25,4 @@ public class Motor {
     public void setCv(int cv) {
         this.cv = cv;
     }
-
 }
