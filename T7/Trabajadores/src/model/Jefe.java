@@ -18,8 +18,13 @@ public class Jefe extends Trabajador implements Empleador{
 
 
     @Override
-    public void realizarTrabajo() {
+    public boolean realizarTrabajo(int nHoras) {
+        System.out.println("El jefe se dispone a realizar el trabajo");
+        if (nHoras > 2){
+            System.out.println("Trabajo completado");
+        }
 
+        return false;
     }
 
 }

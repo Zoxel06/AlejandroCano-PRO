@@ -2,8 +2,6 @@ package model;
 
 public interface Empleador {
 
-    void realizarTrabajo();
+    boolean realizarTrabajo(int nHoras);
     }
 
-
-}

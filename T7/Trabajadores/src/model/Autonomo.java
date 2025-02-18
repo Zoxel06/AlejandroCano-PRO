@@ -1,6 +1,6 @@
 package model;
 
-public class Autonomo extends Trabajador{
+public class Autonomo extends Trabajador implements Sindicador{
 
     private int cuotaSS;
 
@@ -35,4 +35,8 @@ public class Autonomo extends Trabajador{
         this.cuotaSS = cuotaSS;
     }
 
+    @Override
+    public void realizarHuelga() {
+        System.out.println("El autonomo secunda la huelga automaticamente");
+    }
 }
