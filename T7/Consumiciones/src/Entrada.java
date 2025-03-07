@@ -2,6 +2,7 @@ import controller.Restaurante;
 import model.Bebida;
 import model.Cliente;
 import model.Consumicion;
+import util.Proveedor;
 
 public class Entrada {
 
@@ -16,7 +17,10 @@ public class Entrada {
         comida.mostrarDatos();
         */
 
-        Restaurante restaurante = new Restaurante();
+        Restaurante restaurante = new Restaurante(Proveedor.COMIDASSL);
+
+        restaurante.informacionProveedor();
+
         restaurante.agregarCliente(new Cliente("Alejandro1"));
         restaurante.agregarCliente(new Cliente("Alejandro2"));
         restaurante.agregarCliente(new Cliente("Alejandro2"));
@@ -26,7 +30,7 @@ public class Entrada {
 
         //restaurante.mostrarClientes();
 
-        restaurante.mostrarCajaRestaurante();
+        // restaurante.mostrarCajaRestaurante();
 
     }
 }

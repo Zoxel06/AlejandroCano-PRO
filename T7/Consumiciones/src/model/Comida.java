@@ -1,6 +1,6 @@
 package model;
 
-final public class Comida extends Consumicion{
+final public class Comida extends Consumicion implements Inventariable{
 
     // nombre y precio??????
 
@@ -32,4 +32,10 @@ final public class Comida extends Consumicion{
     public void setCalorias(int calorias) {
         this.calorias = calorias;
     }
+
+    @Override
+    public void almacenar() {
+        System.out.println("La comida se almacena en el frigo");
+    }
+
 }
