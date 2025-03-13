@@ -1,33 +1,14 @@
 package model;
 
-public class Doctor {
-    private String nombre;
-    private String apellido;
+public class Doctor extends Persona{
     private int numeroColegiado;
 
     public Doctor() {
     }
 
     public Doctor(String nombre, String apellido, int numeroColegiado) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+        super(nombre, apellido);
         this.numeroColegiado = numeroColegiado;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public int getNumeroColegiado() {

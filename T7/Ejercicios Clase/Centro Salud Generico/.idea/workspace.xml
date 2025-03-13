@@ -5,38 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="508de702-b9dc-494e-9c17-e5084032caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/Centro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Cita.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Digestivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Doctor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/General.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Paciente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Traumatologia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/Ejercicios Tema 7.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/src/Formulario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/src/utils/LetraException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Ejercicios Tema 7/src/utils/LongitudException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/Genericos.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/controller/Gestor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Coche.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Deportivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Gestionable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Monovolumen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Todoterreno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Genericos/src/model/Vendedor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Excepciones/src/Operaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Excepciones/src/Operaciones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cita.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Digestivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Digestivo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Doctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/General.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Paciente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Paciente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Traumatologia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Traumatologia.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +31,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Zoxel06"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Zoxel06/AlejandroCano-PRO.git",
+    "accountId": "8d350976-ab3b-4a50-bb48-f83cb7a14111"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2uALjolUavMg8wesRjW0yrVZEl0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -65,7 +55,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/reycr/Documents/GitHub/AlejandroCano-PRO/T7/Ejercicios Clase/Centro Salud Generico"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
