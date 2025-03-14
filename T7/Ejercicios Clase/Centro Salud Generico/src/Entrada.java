@@ -19,6 +19,12 @@ static Scanner scanner = new Scanner(System.in);
             System.out.println("8. Salir");
 
             opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    break;
+            }
+
         } while (opcion != 8);
 
     }

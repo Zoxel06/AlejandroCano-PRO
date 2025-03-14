@@ -5,16 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="508de702-b9dc-494e-9c17-e5084032caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Persona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Anidadas/Anidadas.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Anidadas/src/Entrada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Anidadas/src/model/ClasePadre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/Casa Anidada.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/Entrada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/controller/Constructora.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/model/Terreno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/Orientacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Digestivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Digestivo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Doctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Centro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Centro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/General.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Paciente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Paciente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Traumatologia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Traumatologia.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +40,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Zoxel06"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zoxel06&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Zoxel06/AlejandroCano-PRO.git",
-    "accountId": "8d350976-ab3b-4a50-bb48-f83cb7a14111"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Zoxel06/AlejandroCano-PRO.git&quot;,
+    &quot;accountId&quot;: &quot;8d350976-ab3b-4a50-bb48-f83cb7a14111&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -57,7 +66,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/reycr/Documents/GitHub/AlejandroCano-PRO/T7/Ejercicios Clase/Centro Salud Generico"
+    "last_opened_file_path": "C:/Users/Usuario DAM1/Documents/GitHub Alejandro Cano/AlejandroCano-PRO/T7/Ejercicios Clase/Centro Salud Generico"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

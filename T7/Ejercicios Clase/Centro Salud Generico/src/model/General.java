@@ -2,7 +2,7 @@ package model;
 
 public class General extends Doctor{
 
-    private String tipo;
+    private String tipo; // --> familiar o infantil (enum)
 
     public General() {
     }

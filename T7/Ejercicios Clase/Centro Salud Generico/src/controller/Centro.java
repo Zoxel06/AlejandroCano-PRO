@@ -5,12 +5,12 @@ import model.Paciente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Centro<LP, LD> {
+public class Centro<P, D> {
 static Scanner scanner = new Scanner(System.in);
-    private ArrayList<LP> listaPacientes;
-    private ArrayList<LD> listaDoctores;
+    private ArrayList<P> listaPacientes;
+    private ArrayList<D> listaDoctores;
 
-    public void admitirPaciente(){
+    public void admitirPaciente(P paciente){
         System.out.println("Dime el nombre");
         String nombre = scanner.next();
         System.out.println("Dime el apellido");
@@ -19,9 +19,6 @@ static Scanner scanner = new Scanner(System.in);
         int nss = scanner.nextInt();
         System.out.println("Dime la dolencia");
         String dolencia = scanner.next();
-        Paciente paciente = new Paciente(nombre,apellido,nss,dolencia);
-        // listaPacientes.add(paciente);
-
     }
 
 }
