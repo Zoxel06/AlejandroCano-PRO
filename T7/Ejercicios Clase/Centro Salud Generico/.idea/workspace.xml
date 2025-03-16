@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="508de702-b9dc-494e-9c17-e5084032caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utils/CitaException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Centro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Centro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Excepciones/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Excepciones/.idea/misc.xml" afterDir="false" />
-    </list>
+    <list default="true" id="508de702-b9dc-494e-9c17-e5084032caf4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
