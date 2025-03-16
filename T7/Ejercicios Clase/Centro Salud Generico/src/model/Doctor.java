@@ -18,4 +18,5 @@ public class Doctor extends Persona{
     public void setNumeroColegiado(int numeroColegiado) {
         this.numeroColegiado = numeroColegiado;
     }
+
 }
