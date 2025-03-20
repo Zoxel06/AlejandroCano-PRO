@@ -76,10 +76,10 @@ static Scanner sc = new Scanner(System.in);
         public Casa() {
         }
 
-        public Casa(double m2, boolean piscina, int habitaciones) {
+        public Casa(double m2) {
             this.m2 = m2;
-            this.piscina = piscina;
-            this.habitaciones = habitaciones;
+            this.piscina = false;
+            this.habitaciones = 0;
         }
 
         public double getM2() {

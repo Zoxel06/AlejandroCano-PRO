@@ -45,15 +45,19 @@ public class Entrada {
                     switch (tipoOrientacion){
                         case 1:
                             orientacion = Orientacion.NORTE;
+                            Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 2:
                             orientacion = Orientacion.SUR;
+                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 3:
                             orientacion = Orientacion.ESTE;
+                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 4:
                             orientacion = Orientacion.OESTE;
+                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         default:
                             System.out.println("Opcion no permitida");
