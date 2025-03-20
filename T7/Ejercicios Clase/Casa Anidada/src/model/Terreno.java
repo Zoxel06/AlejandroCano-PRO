@@ -1,6 +1,6 @@
 package model;
 
-import utils.Orientacion;
+import utils.*;
 
 import java.util.Scanner;
 
@@ -20,6 +20,12 @@ static Scanner sc = new Scanner(System.in);
         this.valoracion = valoracion * orientacion.getRevalorizacion();
     }
 
+    public void estaTerreno(Terreno terreno) throws TerrenoNoCreadoException{
+        if (terreno == null){
+            throw new TerrenoNoCreadoException("Para crear una casa tienes que haber creado un terreno antes");
+        }
+    }
+
     public void construirCasa(double m2){
         if (casa == null && this.m2 > m2){
             casa = new Casa();
@@ -32,6 +38,18 @@ static Scanner sc = new Scanner(System.in);
         } else if (orientacion.name().equalsIgnoreCase("este") || orientacion.name().equalsIgnoreCase("oeste")) {
             this.valoracion = valoracion * orientacion.getRevalorizacion();
         }
+    }
+
+    public void mostrarDatosTerreno(){
+        System.out.println("m2 = " + m2);
+        System.out.println("orientacion = " + orientacion);
+        System.out.println("valoracion = " + valoracion);
+    }
+
+    public void mostrarDatosCasa(){
+        System.out.println("M2 = " + casa.m2);
+        System.out.println("Piscina = " + casa.piscina);
+        System.out.println("Habitaciones = " + casa.habitaciones);
     }
 
     public Casa getCasa() {
@@ -80,6 +98,33 @@ static Scanner sc = new Scanner(System.in);
             this.m2 = m2;
             this.piscina = false;
             this.habitaciones = 0;
+        }
+
+        public void construirHabitacion(double m2){
+            if (m2 > this.m2){
+                System.out.println("Excepcion");
+            } else {
+                habitaciones++;
+                this.m2 -= m2;
+                System.out.println("Habitacion construida con exito");
+            }
+        }
+
+        public void construirPiscina(){
+            if (piscina) {
+                System.out.println("Excepcion");
+            } else {
+                piscina = true;
+                System.out.println("Piscina construida con exito");
+            }
+        }
+
+        public void construirAnexo(double m2){
+            if (m2 > Terreno.this.m2 - this.m2){
+                System.out.println("Excepcion (no hay suficiente espacio)");
+            } else {
+                this.m2 += m2;
+            }
         }
 
         public double getM2() {

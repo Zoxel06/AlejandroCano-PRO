@@ -1,6 +1,7 @@
 import controller.Constructora;
 import model.Terreno;
 import utils.Orientacion;
+import utils.TerrenoNoCreadoException;
 
 import java.util.Scanner;
 
@@ -9,17 +10,17 @@ public class Entrada {
 
     public static void main(String[] args) {
 
-        Constructora constructora = new Constructora();
+        Terreno terreno = null;
 
         int opcion = 0;
 
         do {
             System.out.println("1. Crear terreno");
             System.out.println("2. Crear casa");
-            System.out.println("3. Crear habitacion");
-            System.out.println("4. Crear piscina");
-            System.out.println("5. Crear anexo");
-            System.out.println("6. Crear habitacion con mas m2 que la casa");
+            System.out.println("3. Mostrar datos del terreno");
+            System.out.println("4. Crear habitacion");
+            System.out.println("5. Crear piscina");
+            System.out.println("6. Crear anexo");
             System.out.println("7. Mostrar datos de la casa");
             System.out.println("8. Salir");
             System.out.println("Elije una opcion");
@@ -40,59 +41,52 @@ public class Entrada {
 
                     int tipoOrientacion = sc.nextInt();
 
-                    Orientacion orientacion;
+                    Orientacion orientacion = null;
 
                     switch (tipoOrientacion){
                         case 1:
                             orientacion = Orientacion.NORTE;
-                            Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 2:
                             orientacion = Orientacion.SUR;
-                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 3:
                             orientacion = Orientacion.ESTE;
-                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         case 4:
                             orientacion = Orientacion.OESTE;
-                            //Terreno terreno = new Terreno(m2Terreno,orientacion,valoracion);
                             break;
                         default:
                             System.out.println("Opcion no permitida");
                     }
-                    Terreno terreno = new Terreno();
+                    terreno = new Terreno(m2Terreno,orientacion,valoracion);
                     break;
                 case 2:
-                    System.out.println("Dime los m2 de la casa");
-                    double m2Casa = sc.nextDouble();
-                    System.out.println("Va a tener piscina?");
-                    String respueta = sc.next();
-                    if (respueta.equalsIgnoreCase("si")) {
-                        boolean piscina = true;
-                    } else if (respueta.equalsIgnoreCase("no")) {
-                        boolean piscina = false;
-                    }
-                    constructora.construirCasa(m2Casa);
+                        System.out.println("Dime los m2 de la casa");
+                        double m2Casa = sc.nextDouble();
+                        terreno.construirCasa(m2Casa);
                     break;
                 case 3:
-
+                    terreno.mostrarDatosTerreno();
                     break;
                 case 4:
-
+                    System.out.println("De cuantos metros cuadrados va a ser la habitacion?");
+                    double m2Habitacion = sc.nextDouble();
+                    terreno.getCasa().construirHabitacion(m2Habitacion);
                     break;
                 case 5:
-
+                        terreno.getCasa().construirPiscina();
                     break;
                 case 6:
-
+                    System.out.println("De cuantos metros cuadrados va a ser el anexo?");
+                    double m2Anexo = sc.nextDouble();
+                    terreno.getCasa().construirAnexo(m2Anexo);
                     break;
                 case 7:
-
+                    terreno.mostrarDatosCasa();
                     break;
                 case 8:
-
+                    System.out.println("Saliendo...");
                     break;
                 default:
                     System.out.println("Opcion no permitida");
