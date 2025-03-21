@@ -1,7 +1,6 @@
 import controller.Constructora;
 import model.Terreno;
-import utils.Orientacion;
-import utils.TerrenoNoCreadoException;
+import utils.*;
 
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class Entrada {
 
     public static void main(String[] args) {
 
-        Terreno terreno = null;
+Terreno terreno = null;
 
         int opcion = 0;
 
@@ -64,7 +63,14 @@ public class Entrada {
                 case 2:
                         System.out.println("Dime los m2 de la casa");
                         double m2Casa = sc.nextDouble();
-                        terreno.construirCasa(m2Casa);
+                        try {
+                            terreno.construirCasa(m2Casa);
+                            if (terreno == null) {
+                                throw new NullPointerException();
+                            }
+                        } catch (NullPointerException e) {
+                            System.out.println("Para constuir una casa tienes que haber creado el terreno antes");
+                        }
                     break;
                 case 3:
                     terreno.mostrarDatosTerreno();
@@ -72,7 +78,12 @@ public class Entrada {
                 case 4:
                     System.out.println("De cuantos metros cuadrados va a ser la habitacion?");
                     double m2Habitacion = sc.nextDouble();
-                    terreno.getCasa().construirHabitacion(m2Habitacion);
+                    try {
+                        terreno.getCasa().construirHabitacion(m2Habitacion);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case 5:
                         terreno.getCasa().construirPiscina();

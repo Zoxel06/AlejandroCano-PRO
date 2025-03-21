@@ -46,9 +46,14 @@ public class Centro<P extends Paciente, D extends Doctor> {
         }
     }
 
-    public void pedirCita() throws CitaException {
+    public void pedirCita() {
         System.out.println("Dime el nss del paciente");
         int nss = scanner.nextInt();
+
+        for (P paciente : listaPacientes){
+
+        }
+
         System.out.println("Dime  la especialidad para la cita");
         String especialidad = scanner.next();
         if (especialidad.equalsIgnoreCase("General")) {
@@ -58,12 +63,8 @@ public class Centro<P extends Paciente, D extends Doctor> {
         } else if (especialidad.equalsIgnoreCase("Traumatologia")) {
             System.out.println("Cita asignada correctamente");
         } else {
-            lanzarExcepcion();
+            System.out.println("El centro no dispone de esta especialidad");
         }
-    }
-
-    public void lanzarExcepcion() throws CitaException {
-        throw new CitaException("El centro no dispone de esa especialidad");
     }
 
     public void verCitasPacientes() {

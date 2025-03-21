@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="508de702-b9dc-494e-9c17-e5084032caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/CasaExistenteException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/CasaNoCreadaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/MetrosInsuficientesException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/PiscinaYaConstruidaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoExistenteException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoNoCreadoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/ValorInvalidoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Casa Anidada/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/Entrada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/model/Terreno.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/model/Terreno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/CasaExistenteException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/CasaNoCreadaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/CasaNoCreadaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/MetrosInsuficientesException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/MetrosInsuficientesException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/PiscinaYaConstruidaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/PiscinaYaConstruidaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoExistenteException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoExistenteException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoNoCreadoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/TerrenoNoCreadoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Casa Anidada/src/utils/ValorInvalidoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Casa Anidada/src/utils/ValorInvalidoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Centro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Centro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Doctor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

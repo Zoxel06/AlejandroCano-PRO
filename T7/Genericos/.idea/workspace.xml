@@ -5,38 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f61827f7-7c5d-42ea-ac44-40f74586b8e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/controller/Centro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Cita.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Digestivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Doctor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/General.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Paciente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Traumatologia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/Ejercicios Tema 7.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/src/Formulario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/src/utils/LetraException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ejercicios Tema 7/src/utils/LongitudException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Genericos.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entrada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/Gestor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Coche.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Deportivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Gestionable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Monovolumen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Todoterreno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Vendedor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Excepciones/src/Operaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Excepciones/src/Operaciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/Entrada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/model/Terreno.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/model/Terreno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/CasaExistenteException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/CasaNoCreadaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/CasaNoCreadaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/MetrosInsuficientesException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/MetrosInsuficientesException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/PiscinaYaConstruidaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/PiscinaYaConstruidaException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/TerrenoExistenteException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/TerrenoExistenteException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/TerrenoNoCreadoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/TerrenoNoCreadoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/ValorInvalidoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Casa Anidada/src/utils/ValorInvalidoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/Entrada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/controller/Centro.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/controller/Centro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios Clase/Centro Salud Generico/src/model/Doctor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -2,13 +2,15 @@ package model;
 
 public class Doctor extends Persona{
     private int numeroColegiado;
+    // private String especialidad;
 
     public Doctor() {
     }
 
-    public Doctor(String nombre, String apellido, int numeroColegiado) {
+    public Doctor(String nombre, String apellido, int numeroColegiado/*, String especialidad*/) {
         super(nombre, apellido);
         this.numeroColegiado = numeroColegiado;
+        //this.especialidad = especialidad;
     }
 
     public int getNumeroColegiado() {

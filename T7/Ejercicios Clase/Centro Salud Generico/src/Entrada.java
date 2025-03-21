@@ -51,8 +51,28 @@ public class Entrada {
                     String apellidoDoctor = scanner.next();
                     System.out.println("Dime el numero de colegiado");
                     int numeroColegiado = scanner.nextInt();
+                    /*System.out.println("Elije la especialidad del doctor");
+                    System.out.println("1. General");
+                    System.out.println("2. Digestivo");
+                    System.out.println("3. Traumatologia");
+                    int especialidadOpcion = scanner.nextInt();
 
-                    Doctor doctor = new Doctor(nombreDoctor, apellidoDoctor, numeroColegiado);
+                    String especialidad = "";
+
+                    switch (especialidadOpcion){
+                        case 1:
+                            especialidad = "general";
+                            break;
+                        case 2:
+                            especialidad = "digestivo";
+                            break;
+                        case 3:
+                            especialidad = "traumatologia";
+                            break;
+                    }
+                     */
+
+                    Doctor doctor = new Doctor(nombreDoctor, apellidoDoctor, numeroColegiado/*,especialidad*/);
 
                     centro.contratarDoctor(doctor);
                     break;
@@ -63,11 +83,7 @@ public class Entrada {
                     centro.verDoctores();
                     break;
                 case 5:
-                    try {
                         centro.pedirCita();
-                    }catch (CitaException e){
-                        System.out.println(e.getMessage());
-                    }
                     break;
                 case 6:
 

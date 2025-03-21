@@ -20,19 +20,30 @@ static Scanner sc = new Scanner(System.in);
         this.valoracion = valoracion * orientacion.getRevalorizacion();
     }
 
-    public void estaTerreno(Terreno terreno) throws TerrenoNoCreadoException{
-        if (terreno == null){
-            throw new TerrenoNoCreadoException("Para crear una casa tienes que haber creado un terreno antes");
-        }
+    public void construirTerreno(double m2, Orientacion orientacion, double valoracion){
+        Terreno terreno = new Terreno(m2,orientacion,valoracion);
     }
 
-    public void construirCasa(double m2){
+    public void construirCasa(double m2) throws NullPointerException{
         if (casa == null && this.m2 > m2){
-            casa = new Casa();
+            casa = new Casa(m2);
+            revalorizarTerreno();
+        } else {
+            throw new NullPointerException("No hay terreno disponible");
         }
     }
 
     public void revalorizarTerreno(){
+
+        if (casa != null){
+            this.valoracion = valoracion * 1.25;
+        }
+
+        assert casa != null;  // es como un if (si casa != null, haz lo siguiente)
+        if (casa.isPiscina()){
+            this.valoracion = valoracion * 1.50;
+        }
+
         if (orientacion.name().equalsIgnoreCase("norte") || orientacion.name().equalsIgnoreCase("sur")){
             this.valoracion = valoracion * orientacion.getRevalorizacion();
         } else if (orientacion.name().equalsIgnoreCase("este") || orientacion.name().equalsIgnoreCase("oeste")) {
@@ -100,9 +111,9 @@ static Scanner sc = new Scanner(System.in);
             this.habitaciones = 0;
         }
 
-        public void construirHabitacion(double m2){
-            if (m2 > this.m2){
-                System.out.println("Excepcion");
+        public void construirHabitacion(double m2) throws Exception{
+            if (m2 > Casa.this.m2){
+                throw new Exception("No hay espacio para la habitacion");
             } else {
                 habitaciones++;
                 this.m2 -= m2;
@@ -110,10 +121,8 @@ static Scanner sc = new Scanner(System.in);
             }
         }
 
-        public void construirPiscina(){
-            if (piscina) {
-                System.out.println("Excepcion");
-            } else {
+        public void construirPiscina() {
+            if (!piscina) {
                 piscina = true;
                 System.out.println("Piscina construida con exito");
             }
