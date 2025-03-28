@@ -10,8 +10,9 @@ public class Entrada {
 
     public static void main(String[] args) {
 
-        OperacionesFichero operacionesFichero = new OperacionesFichero();
+        OperacionesFicheros operacionesFicheros = new OperacionesFicheros();
 
+        /*
         System.out.println("Dime el mensaje que quieras cifrar");
         String mensaje = null;
         try{
@@ -22,9 +23,15 @@ public class Entrada {
         System.out.println("Indica cual es la fase de cifrado");
         int faseCifrado = scanner.nextInt();
 
-        operacionesFichero.escribirMensaje("src/recursos/mensaje.txt",mensaje);
+        operacionesFicheros.cifrarMensaje("src/recursos/mensaje.txt",mensaje,faseCifrado);
 
-        operacionesFichero.cifrarMensaje("src/recursos/mensaje.txt");
+        System.out.println("Indica cual es la fase de descifrado");
+        int faseDescifrado = scanner.nextInt();
+
+        operacionesFicheros.descifrarCodigo("src/recursos/mensaje.txt",mensaje,faseDescifrado);
+         */
+
+        operacionesFicheros.escrituraFicheroCompleto("src/recursos/escrituraCompleta");
 
     }
 
