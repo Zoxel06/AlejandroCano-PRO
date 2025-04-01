@@ -19,10 +19,6 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    @Override
-    public String toString() {
-        return nombre + ", " + apellido + ", " + correo + ", " + telefono;
-    }
 
     public void mostrarDatos(){
         System.out.println("nombre = " + nombre);
