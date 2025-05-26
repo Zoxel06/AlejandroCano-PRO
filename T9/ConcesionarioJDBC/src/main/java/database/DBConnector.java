@@ -17,7 +17,7 @@ public class DBConnector {
 
     public static void createConnection(){
         try {
-            connection = DriverManager.getConnection("jdbc:mysql//localhost:3306/pasajeros_ces","root","pwd1");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pasajeros_ces","root","pwd1");
         } catch (SQLException e) {
             System.out.println("Error al crear conexion");
             System.out.println(e.getMessage());
