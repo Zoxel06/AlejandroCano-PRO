@@ -9,7 +9,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Coche implements Serializable  {
     private String matricula, marca, modelo,color;
-    private int precio;
+    private int id, precio;
 
     public void mostrarDatos(){
         System.out.println("matricula = " + matricula);
@@ -19,4 +19,11 @@ public class Coche implements Serializable  {
         System.out.println("precio = " + precio);
     }
 
+    public Coche(String matricula, String marca, String modelo, String color, int precio) {
+        this.matricula = matricula;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.color = color;
+        this.precio = precio;
+    }
 }

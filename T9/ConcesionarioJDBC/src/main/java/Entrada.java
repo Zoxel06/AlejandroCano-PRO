@@ -37,7 +37,7 @@ public class Entrada {
                     cocheDTO.aniadirCoche(new Coche(matricula, marca, modelo, color, precio));
                     break;
                 case 2:
-                    System.out.printf("Inserta el id del coche que quieres borrar");
+                    System.out.println("Inserta el id del coche que quieres borrar");
                     int id = scanner.nextInt();
 
                     cocheDTO.borrarCoche(id);
