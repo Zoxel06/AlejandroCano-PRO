@@ -1,3 +1,4 @@
+import controller.ConcesionarioController;
 import dto.CocheDTO;
 import model.Coche;
 
@@ -9,6 +10,7 @@ public class Entrada {
     public static void main(String[] args) {
 
         CocheDTO cocheDTO = new CocheDTO();
+        ConcesionarioController concesionarioController = new ConcesionarioController();
 
         int opcion;
 
