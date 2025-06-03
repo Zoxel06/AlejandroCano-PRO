@@ -2,6 +2,7 @@ import controller.ConcesionarioController;
 import dto.CocheDTO;
 import model.Coche;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Entrada {
@@ -20,7 +21,8 @@ public class Entrada {
             System.out.println("2. Borrar coche");
             System.out.println("3. Consultar coche");
             System.out.println("4. Listar coches");
-            System.out.println("5. Salir");
+            System.out.println("5. Exportar coches a CSV");
+            System.out.println("6. Salir");
 
             opcion = scanner.nextInt();
 
@@ -55,6 +57,9 @@ public class Entrada {
                     cocheDTO.listarCoches();
                     break;
                 case 5:
+
+                    break;
+                case 6:
                     System.out.println("Saliendo...");
                     break;
                 default:

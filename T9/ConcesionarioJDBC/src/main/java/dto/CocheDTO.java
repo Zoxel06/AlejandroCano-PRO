@@ -4,10 +4,15 @@ import database.DBConnector;
 import database.SchemaDB;
 import model.Coche;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CocheDTO {
@@ -105,6 +110,29 @@ public class CocheDTO {
         } catch (SQLException e) {
             System.out.println("Error en la query");
         }
+    }
+
+
+    public void exportarCsv(){
+
+        File file = new File("src/main/java/resources/coches.csv");
+        ArrayList<Coche> listaCoches = new ArrayList<>();
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("Id;Matricula;Marca;Modelo;Color;Precio");
+
+            for (Coche coche : listaCoches){
+                fileWriter.write(coche.getId() + ";" +
+                        coche.getMatricula() + ";" +
+                        coche.getMarca() + ";" +
+                        coche.getModelo() + ";" +
+                        coche.getColor() + ";" +
+                        coche.getPrecio() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error en la escritura");
+        }
+
     }
 
 }

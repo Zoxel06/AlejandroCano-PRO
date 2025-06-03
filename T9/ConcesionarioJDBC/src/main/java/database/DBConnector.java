@@ -1,5 +1,6 @@
 package database;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ public class DBConnector {
 
     public static void createConnection(){
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pasajeros_ces","root","psswrd33");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pasajeros_ces","root","pwd1");
         } catch (SQLException e) {
             System.out.println("Error al crear conexion");
             System.out.println(e.getMessage());
@@ -32,5 +33,6 @@ public class DBConnector {
             System.out.println(e.getMessage());
         }
     }
+
 
 }
