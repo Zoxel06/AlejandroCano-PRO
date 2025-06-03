@@ -4,9 +4,7 @@ import database.DBConnector;
 import database.SchemaDB;
 import model.Coche;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -132,7 +130,6 @@ public class CocheDTO {
         } catch (IOException e) {
             System.out.println("Error en la escritura");
         }
-
     }
 
 }
