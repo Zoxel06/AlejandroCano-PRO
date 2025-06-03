@@ -69,7 +69,7 @@ public class CocheDTO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 id = resultSet.getInt(SchemaDB.COL_ID);
                 String matricula = resultSet.getString(SchemaDB.COL_REGISTRATION);
                 String marca = resultSet.getString(SchemaDB.COL_BRAND);
