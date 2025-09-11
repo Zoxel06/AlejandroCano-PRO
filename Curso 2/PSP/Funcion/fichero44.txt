@@ -1,0 +1,19 @@
+
+Interfaz: 192.168.2.27 --- 0x7
+  Direcci¢n de Internet          Direcci¢n f¡sica      Tipo
+  192.168.2.14          4c-cc-6a-7b-07-7f     din mico  
+  192.168.2.17          4c-cc-6a-7b-07-0d     din mico  
+  192.168.2.19          4c-cc-6a-7b-06-83     din mico  
+  192.168.2.23          4c-cc-6a-7b-07-79     din mico  
+  192.168.2.24          4c-cc-6a-7a-44-41     din mico  
+  192.168.2.29          4c-cc-6a-7b-06-52     din mico  
+  192.168.2.167         80-9b-20-57-91-1c     din mico  
+  192.168.2.227         b4-b5-2f-d0-6b-8e     din mico  
+  192.168.2.254         cc-2d-e0-13-c0-40     din mico  
+  192.168.2.255         ff-ff-ff-ff-ff-ff     est tico  
+  224.0.0.2             01-00-5e-00-00-02     est tico  
+  224.0.0.22            01-00-5e-00-00-16     est tico  
+  224.0.0.251           01-00-5e-00-00-fb     est tico  
+  224.0.0.252           01-00-5e-00-00-fc     est tico  
+  239.255.255.250       01-00-5e-7f-ff-fa     est tico  
+  255.255.255.255       ff-ff-ff-ff-ff-ff     est tico  
