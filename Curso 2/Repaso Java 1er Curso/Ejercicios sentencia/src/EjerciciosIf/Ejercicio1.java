@@ -1,3 +1,5 @@
+package EjerciciosIf;
+
 import java.util.Scanner;
 
 public class Ejercicio1 {
