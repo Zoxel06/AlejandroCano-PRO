@@ -1,6 +1,12 @@
 package model
 
-class Producto(var id: Int, var precio: Double = 10.0, var nombre: String? = null, var descripcion: String? = null) {
+class Producto(
+    var id: Int,
+    var precio: Double = 10.0,
+    var nombre: String? = null,
+    var descripcion: String? = null,
+    var categoria: Categoria = Categoria.Generica
+    ) {
 
     // id
     // precio
@@ -26,14 +32,12 @@ class Producto(var id: Int, var precio: Double = 10.0, var nombre: String? = nul
     // si no hay nombre, aparece SIN NOMBRE
     // si no hay descripcion, aparece SIN DESCRIPCION
 
-    override fun toString(): String {
-        return "id=$id, precio=$precio, nombre=$nombre, descripcion=$descripcion"
-    }
 
     fun mostrarDatos() {
         println("ID: $id")
         println("Precio: $precio")
         println("Nombre: ${nombre?: "Sin definir"}")
         println("Descripcion: ${descripcion?: "Sin definir"}")
+        println("Categoria: ${categoria.name}")
     }
 }
