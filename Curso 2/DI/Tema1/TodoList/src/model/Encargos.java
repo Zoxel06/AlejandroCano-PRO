@@ -1,18 +1,29 @@
 package model;
 
+import java.util.ArrayList;
+
+//crear el metodo que permite agregar un encargo
+//los encargos deben tener ID unico
+// crear el metodo que permite eliminar un encargo
+//para ello se pide el ID del encargo y se quita de la lista -> PONER AVISOS
 public class Encargos {
 
-    private String descripcion;
     private int id;
+    private String descripcion;
     private boolean completada;
 
     public Encargos() {
     }
 
-    public Encargos(String descripcion, int id, boolean completa) {
-        this.descripcion = descripcion;
+    public Encargos(String descripcion, int id, boolean completada) {
         this.id = id;
+        this.descripcion = descripcion;
         this.completada = completada;
+    }
+
+    public Encargos(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
     }
 
 
@@ -48,4 +59,7 @@ public class Encargos {
                 ", completa=" + completada +
                 '}';
     }
+
+
+
 }
