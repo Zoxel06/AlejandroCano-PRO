@@ -9,7 +9,7 @@ fun main() {
     var camiseta: Producto = Producto(id = 1, precio = 14.99, categoria = Categoria.Ropa)
     var zapatillas = Producto(2) // EL PRECIO ES 10.0 POR DEFECTO (parametro de la clase producto)
     // id, precio, nombre
-    var pantalones = Producto(3,30.0,"Pantalones", categoria = Categoria.Generica)
+    var pantalones = Producto(3,30.0,"Pantalones", categoria = Categoria.Ropa)
     var gorra = Producto(4,20.0, descripcion = "Gorra molona", categoria = Categoria.Ropa)
     var cartera = Producto(5,5.0,"Cartera","Cartera para guardar la pasta", categoria = Categoria.Generica)
 
@@ -42,10 +42,23 @@ fun main() {
     }*/
 
     var tienda: Tienda = Tienda("Tienda 1")
-
+    var cliente: Cliente = Cliente(1,"Cliente 1")
 
     tienda.almacen = listaProductos
-    tienda.mostrarAlmacen()
+    //tienda.mostrarAlmacen()
+    //tienda.buscarProductosCategoria(Categoria.Tecnologia)
+
+    cliente.agregarProductoCarrito(gorra)
+    cliente.agregarProductoCarrito(pantalones)
+    cliente.agregarProductoCarrito(pantalones)
+    //cliente.mostrarCarrito()
+    //cliente.accesoPorPosicion(0)
+    //cliente.eliminarProductoCarrito(3)
+    //cliente.mostrarCarrito()
+
+    cliente.calcularFactura()
+    cliente.pedirFactura()
+
 
 
 }

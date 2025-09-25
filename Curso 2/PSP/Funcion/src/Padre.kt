@@ -14,5 +14,4 @@ fun main() {
     val input = BufferedReader(InputStreamReader(procesoEjecutado.inputStream)).readLine()
 
     println(input)
-
 }
