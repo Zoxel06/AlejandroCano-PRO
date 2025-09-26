@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Tarea {
+public abstract class Tarea {
 
 
     // variables
@@ -42,11 +42,11 @@ public class Tarea {
         listaTareas = new ArrayList<>();
     }
 
-    public Tarea(String descripcion, String titulo, int numeroPersonas) {
+    public Tarea(String titulo, String descripcion, int numeroPersonas) {
         // completada = false;
         // prioritario = false;
-        this.descripcion = descripcion;
         this.titulo = titulo;
+        this.descripcion = descripcion;
         encargados = new Persona[numeroPersonas];
         listaTareas = new ArrayList<>();
     }
@@ -66,6 +66,9 @@ public class Tarea {
 
     // creamos un encargo
     // Los encargos tienen una propiedad llamada descripcion, una propiedad llamada id y una propiedad llamada completa
+
+
+    public abstract void enviarRecordatorio();
 
     public void asignarPersona(Persona persona) {
         for (int i = 0; i < encargados.length; i++) {
@@ -201,6 +204,7 @@ public class Tarea {
         completada = true;
         System.out.println("Tarea completada");
     }
+
 
 
     public String getTitulo() {

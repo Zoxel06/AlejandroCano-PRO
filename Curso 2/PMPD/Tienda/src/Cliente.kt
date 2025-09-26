@@ -79,6 +79,7 @@ class Cliente(
             println("La factura es de $factura$")
 
             carrito.clear()
+            factura = 0.0
             println("El carrito se ha vaciado")
         } else {
             println("El carrito esta vacio")
