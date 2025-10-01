@@ -1,6 +1,5 @@
 import controller.Planificador;
 import model.Prioridad;
-import model.Tareas;
 import model.TareasOcio;
 import model.TareasTrabajo;
 
@@ -8,20 +7,17 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-
         Planificador planificador = new Planificador();
-
-
-        int opcion = 0;
+        int opcion;
 
         do {
-
             System.out.println("Elije una opcion");
             System.out.println("1. Registrar tarea");
             System.out.println("2. Modificar tarea");
             System.out.println("3. Listar tareas");
-            System.out.println("4. Registrar tarea");
+            System.out.println("4. Eliminar tarea");
             System.out.println("5. Completar tarea");
             System.out.println("6. Listar tareas completas");
             System.out.println("7. Listar tareas incompletas");
@@ -31,19 +27,14 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    int tipo, nPrioridad;
-                    int id;
+                    int tipo, nPrioridad, id;
                     String titulo, descripcion, fecha, ubicacion, proyecto;
                     double presupuesto;
-                    boolean completada;
                     Prioridad prioridad = null;
 
-
-                    Tareas tarea = null;
-
-                    System.out.println("Elije el tipo de tarea que quieres realizar");
-                    System.out.println("1. Tarea de ocio");
-                    System.out.println("2. Tarea de trabajo");
+                    System.out.println("Elije el tipo de tarea");
+                    System.out.println("1. Ocio");
+                    System.out.println("2. Trabajo");
                     tipo = scanner.nextInt();
 
                     System.out.println("Introduce el id");
@@ -68,7 +59,7 @@ public class Main {
                             prioridad = Prioridad.ALTA;
                             break;
                         default:
-                            System.out.println("Opcion no permitida");
+                            System.out.println("Opción no válida");
                             break;
                     }
 
@@ -77,50 +68,54 @@ public class Main {
                         ubicacion = scanner.next();
                         System.out.println("Introduce el presupuesto");
                         presupuesto = scanner.nextDouble();
-
-                        tarea = new TareasOcio(id, titulo, descripcion, fecha, prioridad, ubicacion, presupuesto);
-                        planificador.registrarTarea(tarea);
+                        planificador.registrarTarea(new TareasOcio(id, titulo, descripcion, fecha, prioridad, ubicacion, presupuesto));
                     } else if (tipo == 2) {
                         System.out.println("Introduce el proyecto");
                         proyecto = scanner.next();
-                        tarea = new TareasTrabajo(id, titulo, descripcion, fecha, prioridad, proyecto);
-                        planificador.registrarTarea(tarea);
+                        planificador.registrarTarea(new TareasTrabajo(id, titulo, descripcion, fecha, prioridad, proyecto));
                     } else {
-                        System.out.println("Opcion no permitida");
+                        System.out.println("Tipo de tarea no válido");
                     }
-
                     break;
+
                 case 2:
                     System.out.println("Dame el id de la tarea que quieres modificar");
                     id = scanner.nextInt();
                     planificador.modificarTarea(id);
                     break;
+
                 case 3:
-
+                    planificador.listarTareas();
                     break;
+
                 case 4:
-
+                    System.out.println("Dame el id de la tarea que quieres eliminar");
+                    id = scanner.nextInt();
+                    planificador.eliminarTarea(id);
                     break;
+
                 case 5:
-
+                    System.out.println("Dame el id de la tarea que quieres completar");
+                    id = scanner.nextInt();
+                    planificador.completarTarea(id);
                     break;
+
                 case 6:
-
+                    planificador.listarTareasCompletas();
                     break;
+
                 case 7:
-
+                    planificador.listarTareasIncompletas();
                     break;
+
                 case 8:
                     System.out.println("Saliendo...");
                     break;
+
                 default:
-                    System.out.println("Opcion no permitida");
+                    System.out.println("Opción no permitida");
                     break;
             }
-
         } while (opcion != 8);
-
-
     }
-
 }

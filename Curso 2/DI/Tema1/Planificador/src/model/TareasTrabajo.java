@@ -13,6 +13,12 @@ public class TareasTrabajo extends Tareas{
         this.proyecto = proyecto;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", proyecto='" + proyecto + '\'';
+    }
+
     public String getProyecto() {
         return proyecto;
     }

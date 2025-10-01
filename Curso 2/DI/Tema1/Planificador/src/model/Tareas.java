@@ -18,6 +18,17 @@ public class Tareas {
         this.prioridad = prioridad;
     }
 
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ", completada=" + completada +
+                ", prioridad=" + prioridad;
+    }
+
     public int getId() {
         return id;
     }

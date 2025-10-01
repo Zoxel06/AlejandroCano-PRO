@@ -15,6 +15,13 @@ public class TareasOcio extends Tareas{
         this.presupuesto = presupuesto;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", ubicacion='" + ubicacion + '\'' +
+                ", presupuesto=" + presupuesto;
+    }
+
     public String getUbicacion() {
         return ubicacion;
     }
