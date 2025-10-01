@@ -91,7 +91,9 @@ public class Main {
 
                     break;
                 case 2:
-
+                    System.out.println("Dame el id de la tarea que quieres modificar");
+                    id = scanner.nextInt();
+                    planificador.modificarTarea(id);
                     break;
                 case 3:
 

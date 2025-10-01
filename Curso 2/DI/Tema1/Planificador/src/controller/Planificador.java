@@ -31,9 +31,6 @@ public class Planificador {
     public void modificarTarea(int id) {
         int campoModificado = 0;
 
-        System.out.println("Dame el id de la tarea que quieres modificar");
-        id = scanner.nextInt();
-
         for (Tareas item : listaTareas) {
             if (item.getId() == id) {
                 if (item instanceof TareasOcio){
@@ -49,6 +46,8 @@ public class Planificador {
 
                     switch (campoModificado){
                         case 1:
+                            System.out.println("Introduce el nuevo titulo");
+                            item.setTitulo(scanner.next());
                             break;
                         case 2:
                             break;
