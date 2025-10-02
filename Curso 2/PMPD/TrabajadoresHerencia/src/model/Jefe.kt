@@ -9,7 +9,6 @@ class Jefe(
 ) : Trabajador(nombre, apellido, dni, salario) {
 
     override fun calcularSalarioNeto(): Double {
-        val salarioNeto: Double = 0.0
 
         if (nResponsabilidad >= 3) {
             salario += (salario * 0.03)
@@ -19,7 +18,7 @@ class Jefe(
             println("Te hemos bajado el salario un 3%")
         }
 
-        return salarioNeto
+        return salario
     }
 
     fun disminuirResponsabilidad() {
