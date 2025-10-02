@@ -6,7 +6,7 @@ class Autonomo(
     dni: String,
     salario: Double,
     seguro: Boolean,
-    var cuotasSS: Double,
+    var cuotasSS: Int,
 ) : Trabajador(nombre, apellido, dni, salario, seguro = seguro) {
 
     override fun calcularSalarioNeto(): Double {
@@ -16,7 +16,7 @@ class Autonomo(
 
     fun pedirDescuento() {
         if (seguro == true){
-            cuotasSS  *= 0.5
+            cuotasSS  *= 0.5.toInt()
             println("Te hemos descontado las cuotas a la mitad")
         } else {
             println("No tienes seguro por lo que no te hemos condedido ningun descuento")
