@@ -18,10 +18,10 @@ while (time.time() - inicio) < tiempo:
           
     if respuesta > numero:
         print("El numero es menor")
-        print(f"Tienes {tiempoRestante} segundos restantes")
+        print(f"Tienes {tiempoRestante} segundos restantes\n")
     elif respuesta < numero:
-        print(f"Tienes {tiempoRestante} segundos restantes")
         print("El numero es mayor")
+        print(f"Tienes {tiempoRestante} segundos restantes\n")
     else:
         print("Enhorabuena, has acertado")
         adivinado = True
