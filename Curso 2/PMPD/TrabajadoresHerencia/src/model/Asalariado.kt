@@ -11,7 +11,7 @@ class Asalariado(
 
     override fun calcularSalarioNeto(): Double {
         // salario total - lo que te quitan de IRPF
-        var salarioNeto: Double = salario -(salario*irpf)
+        var salarioNeto: Double = salario -(salario*(irpf/100))
 
         return salarioNeto
     }

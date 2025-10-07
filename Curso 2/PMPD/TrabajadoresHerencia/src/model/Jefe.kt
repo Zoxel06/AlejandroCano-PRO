@@ -6,7 +6,8 @@ class Jefe(
     dni: String,
     salario: Double,
     var nResponsabilidad: Int
-) : Trabajador(nombre, apellido, dni, salario) {
+) : Trabajador(nombre, apellido, dni, salario),
+    Sindicato {
 
     override fun calcularSalarioNeto(): Double {
 
@@ -35,9 +36,25 @@ class Jefe(
         }
     }
 
+
     override fun mostrarDatos() {
         super.mostrarDatos()
         println("nResponsabilidad: $nResponsabilidad")
+    }
+
+    override fun bajarSueldos(lista: ArrayList<Trabajador>): Boolean {
+        println("Procedes a bajar los sueldos, eres jefe y puedes hacerlo")
+        lista.forEach {
+            if (it !is Jefe){
+                it.salario *= 0.90
+            }
+        }
+        return true
+    }
+
+    override fun calcularBeneficios(): Double {
+        println("Como jefe, vas a calcular el beneficio de la empresa")
+        return 0.0
     }
 
 }

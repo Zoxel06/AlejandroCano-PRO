@@ -46,8 +46,9 @@ print(Fore.BLUE+Style.BRIGHT+"🤓 CALCULADORA CIENTIFICA 🤓"+Style.RESET_ALL)
 print(Fore.YELLOW+Style.BRIGHT+"---------------------------\n"+Style.RESET_ALL)
 
 print(Fore.YELLOW+"Introduce la contrasenia"+Style.RESET_ALL)
-contrasenia = input()
-if contrasenia == "1234":
+contrasenia = "1234"
+contraseniaInput = input()
+if contraseniaInput == contrasenia:
     print(Fore.GREEN+Style.BRIGHT+"\n✔️  Contrasenia correcta, acceso concedido ✔️\n\n"+Style.RESET_ALL)
     
     while opcion != 14:
