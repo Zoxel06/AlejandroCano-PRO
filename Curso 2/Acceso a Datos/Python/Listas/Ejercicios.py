@@ -6,7 +6,7 @@ print(listaFrutas)
 print(listaFrutas[0])
 print(listaFrutas[-1])
 
-
+33333332
 #Ejercicio 2
 
 lista = []
