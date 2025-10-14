@@ -2,13 +2,18 @@ matriz = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 
 
 repetirCentral = input("Quieres repetir el numero central (si / no): ")
 
-resultado = 0
-for i in range(matriz):
-    resultado += matriz[i][i]
-    resultado += matriz[i][4-i]
-    
+longitud = len(matriz)
 
-if repetirCentral == "si" or resultado == "Si" or resultado == "SI":
+principal = 0
+secundaria = 0
+
+for i in range(longitud):
+    principal += matriz[i][i]
+    secundaria += matriz[i][longitud -1 -i]
+    
+resultado = principal + secundaria
+
+if repetirCentral == "no" or resultado == "No" or resultado == "NO":
     resultado -= 13
 
 print(resultado)

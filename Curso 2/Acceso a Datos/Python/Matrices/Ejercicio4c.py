@@ -11,5 +11,5 @@ for n in range(tamanio):
 
 
 print("Matriz final:")
-for fila in listaListas:
-    print(fila)
+for x in listaListas:
+    print(x)
