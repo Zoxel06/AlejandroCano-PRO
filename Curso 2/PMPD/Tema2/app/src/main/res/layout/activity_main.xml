@@ -6,15 +6,35 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     tools:context=".MainActivity">
 
+    <!-- Al @+id le pongo el "+" porque lo creo a la vez que lo referencio,
+    al contrario de los strings, que se crean en otra clase y solo hace falta referenciarlos-->
+
     <TextView
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="APP ANDROID"
-        android:textSize="25sp"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:textSize="25sp"
+        android:text="@string/texto_inicial"
+        />
+
+    <EditText
+        android:id="@+id/editNombre"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        />
+
+    <Button
+        android:id="@+id/botonSaludar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center"
+        android:text="@string/boton_saludar"
+        />
 
 </LinearLayout>
