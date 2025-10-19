@@ -1,4 +1,4 @@
-import model.Producto
+package model
 
 class Cliente(
     var id: Int,

@@ -64,13 +64,28 @@ class Tienda(var nombre: String) {
 
     }
 
-    fun buscarProductoId(id: Int): Unit {
+    fun buscarProductoId(id: Int) {
         // buscando -> obtengo solo 1 elemento
 
         var productoBusqueda: Producto? = almacen.find {
-            return@find it?.id == id
+            it?.id == id
         }
+        if (productoBusqueda != null){
+            productoBusqueda.mostrarDatos()
+        } else {
+            println("No se ha encontrado el producto")
+        }
+
     }
+
+    fun estaProducto(id: Int): Boolean {
+        val encontrado = almacen.find { it?.id == id }
+        if (encontrado != null){
+            return true
+        }
+        return false
+    }
+
 
     // vamos a vender un producto. Para ello se solicita el id del producto a vender
     // En caso de estar en el almacen_
