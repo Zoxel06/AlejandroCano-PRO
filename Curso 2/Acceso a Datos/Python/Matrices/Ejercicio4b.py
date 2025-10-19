@@ -4,14 +4,11 @@ listaNumeros = []
 
 nImpar = 1
 
-for n in range (tamanio+1):
+for n in range (tamanio):
     if (listaNumeros != []):
-        print(listaNumeros)
         listaNumeros = []
     for m in range(tamanio):
-        
-        if (nImpar % 2 == 0):
-            nImpar += 1
-        
         listaNumeros.append(nImpar)
-        nImpar += 1
+        nImpar += 2
+        
+    print(listaNumeros)
