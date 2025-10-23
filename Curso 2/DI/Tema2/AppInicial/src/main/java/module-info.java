@@ -10,6 +10,7 @@ module org.example.appinicial {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires annotations;
 
     opens org.example.appinicial to javafx.fxml;
     exports org.example.appinicial;
