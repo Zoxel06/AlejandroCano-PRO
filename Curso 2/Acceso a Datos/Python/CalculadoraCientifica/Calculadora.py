@@ -1,5 +1,6 @@
 import math
 from colorama import Fore, Back, Style, init
+
  
 def suma(n1,n2):
     return n1+n2
