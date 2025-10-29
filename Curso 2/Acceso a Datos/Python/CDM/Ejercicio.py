@@ -259,14 +259,12 @@ def buscarMaterial():
     termino = input("Introduce nombre/marca/estado a buscar: ").lower()
     encontrado = False
 
-    # Buscar en almacén central
     for id_mat, mat in cdm["almacen_central"]["inventario"].items():
         if termino in mat["nombre"].lower() or termino in mat["marca"].lower() or termino in mat["estado"].lower():
             color = Fore.GREEN if mat['estado']=="disponible" else (Fore.YELLOW if mat['estado']=="reservado" else Fore.RED)
             print(f"{id_mat} (Almacén central): {mat['nombre']} - {mat['marca']} - {color}{mat['estado']}{Style.RESET_ALL}")
             encontrado = True
 
-    # Buscar en todos los distritos
     for dist, info in cdm["distritos"].items():
         for id_mat, mat in info["inventario"].items():
             if termino in mat["nombre"].lower() or termino in mat["marca"].lower() or termino in mat["estado"].lower():
