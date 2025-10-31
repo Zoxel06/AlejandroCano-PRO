@@ -16,30 +16,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         contador = savedInstanceState?.getInt("tag_contador") ?: 0
-        binding.textoContador.text = "$contador" // o contador.toString
+        binding.textoContador?.text = "$contador" // o contador.toString
 
         acciones()
     }
 
     private fun acciones() {
-        binding.botonIncremento.setOnClickListener(this)
-        binding.botonDecremento.setOnClickListener(this)
+        binding.botonIncremento?.setOnClickListener(this)
+        binding.botonDecremento?.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         // Diferenciar quien ha lanzado el evento
 
         when (v!!.id) {
-            binding.botonIncremento.id -> {
+            binding.botonIncremento!!.id -> {
                 contador++
             }
 
-            binding.botonDecremento.id -> {
+            binding.botonDecremento!!.id -> {
                 contador--
             }
         }
 
-        binding.textoContador.text = "$contador"
+        binding.textoContador?.text = "$contador"
 
     }
 
