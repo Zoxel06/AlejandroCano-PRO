@@ -1,0 +1,22 @@
+Palabras que se repiten y cuantas veces:
+  sol: 618
+  luz: 618
+  cielo: 618
+  mar: 618
+  tierra: 618
+  montaña: 617
+  rio: 617
+  bosque: 617
+  nube: 617
+  estrella: 617
+  arena: 617
+  viento: 617
+  flor: 617
+  piedra: 617
+  fuego: 617
+  agua: 617
+  camino: 617
+  campo: 617
+  hoja: 617
+  rama: 617
+Palabras que mas se repiten (618 veces): sol, luz, cielo, mar, tierra

@@ -36,7 +36,7 @@ public class MainController implements Initializable {
     }
 
     private void initGUI() {
-        // Personalizara las partes de la UI
+        // Personalizará las partes de la UI
         //buttonPulsar.setEffect(sombra);
     }
 
