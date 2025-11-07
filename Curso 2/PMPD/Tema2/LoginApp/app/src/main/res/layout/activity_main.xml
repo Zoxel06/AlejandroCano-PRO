@@ -9,104 +9,106 @@
 
     <ImageView
         android:background="@android:color/transparent"
-        android:id="@+id/imagenLogin"
+        android:id="@+id/iamgenLogin"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:src="@drawable/diego2"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        android:src="@drawable/diego"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:drawableStart="@drawable/correo"
-        android:drawablePadding="12dp"
         android:hint="Introduce correo"
         android:inputType="textEmailAddress"
         android:gravity="center"
         android:id="@+id/editCorreo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/imagenLogin"
-        app:layout_constraintStart_toStartOf="@+id/imagenLogin"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintEnd_toEndOf="@+id/iamgenLogin"
+        app:layout_constraintStart_toStartOf="@+id/iamgenLogin"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <EditText
-        android:drawableStart="@drawable/seguro"
-        android:drawablePadding="12dp"
         android:layout_marginTop="12dp"
-        android:hint="Introduce contraseña"
-        android:inputType="textPassword"
-        android:gravity="center"
-        android:id="@+id/editContraseña"
+        android:id="@+id/editPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/imagenLogin"
-        app:layout_constraintStart_toStartOf="@+id/imagenLogin"
+        android:drawableStart="@drawable/seguro"
+        android:gravity="center"
+        android:hint="Introduce password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/iamgenLogin"
+        app:layout_constraintStart_toStartOf="@+id/iamgenLogin"
         app:layout_constraintTop_toBottomOf="@+id/editCorreo" />
 
     <Spinner
+        android:entries="@array/plataformas"
+        android:layout_marginTop="12dp"
         android:id="@+id/spinnerPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/editContraseña"
-        app:layout_constraintTop_toBottomOf="@+id/editContraseña" />
+        app:layout_constraintEnd_toEndOf="@+id/editPass"
+        app:layout_constraintTop_toBottomOf="@+id/editPass" />
 
     <CheckBox
-        android:id="@+id/checkRecordar"
         android:layout_marginTop="12dp"
+        android:id="@+id/checkRecordar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recordar Contraseña"
+        android:text="Recordar contraseña"
         app:layout_constraintEnd_toEndOf="@+id/spinnerPerfil"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPerfil" />
 
+
     <ImageButton
-        android:id="@+id/buttonGoogle"
+        android:id="@+id/botonGoogle"
         android:scaleType="fitXY"
         android:src="@drawable/google"
+        android:layout_marginTop="24dp"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@+id/editContraseña"
+        app:layout_constraintStart_toStartOf="@+id/editPass"
         app:layout_constraintTop_toBottomOf="@+id/checkRecordar" />
 
     <ImageButton
-        android:id="@+id/buttonGithub"
-        android:src="@drawable/gith"
+        android:id="@+id/botonFacebook"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="@+id/checkRecordar"
-        app:layout_constraintTop_toTopOf="@+id/buttonGoogle" />
-
-    <ImageButton
-        android:id="@+id/buttonFacebook"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="12dp"
         android:scaleType="fitXY"
         android:src="@drawable/facebook"
-        app:layout_constraintEnd_toStartOf="@+id/buttonGithub"
-        app:layout_constraintStart_toEndOf="@+id/buttonGoogle"
-        app:layout_constraintTop_toBottomOf="@+id/checkRecordar" />
+        app:layout_constraintEnd_toEndOf="@+id/checkRecordar"
+        app:layout_constraintTop_toTopOf="@+id/botonGoogle" />
 
-    <TextView
-        android:id="@+id/editLogin"
-        android:text="Iniciar Sesion"
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:id="@+id/botonGit"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/gith"
+        app:layout_constraintEnd_toStartOf="@+id/botonFacebook"
+        app:layout_constraintStart_toEndOf="@+id/botonGoogle"
+        app:layout_constraintTop_toTopOf="@+id/botonGoogle" />
+
+    <Button
+        android:id="@+id/botonLogin"
+        android:text="@string/text_login"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFacebook" />
+        app:layout_constraintEnd_toEndOf="@+id/botonFacebook"
+        app:layout_constraintStart_toStartOf="@+id/botonGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/botonGit" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
