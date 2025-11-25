@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="4"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtResultado"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#222"
+        android:textColor="#fff"
+        android:textSize="28sp"
+        android:gravity="end|center_vertical"
+        android:padding="10dp"
+        android:layout_columnSpan="4"/>
+
+    <Button android:id="@+id/btnC" android:text="C"/>
+    <Button android:id="@+id/btnDel" android:text="←"/>
+    <Button android:id="@+id/btnMasMenos" android:text="±"/>
+    <Button android:id="@+id/btnDiv" android:text="÷"/>
+
+    <Button android:id="@+id/btn7" android:text="7"/>
+    <Button android:id="@+id/btn8" android:text="8"/>
+    <Button android:id="@+id/btn9" android:text="9"/>
+    <Button android:id="@+id/btnMul" android:text="×"/>
+
+    <Button android:id="@+id/btn4" android:text="4"/>
+    <Button android:id="@+id/btn5" android:text="5"/>
+    <Button android:id="@+id/btn6" android:text="6"/>
+    <Button android:id="@+id/btnRes" android:text="-"/>
+
+    <Button android:id="@+id/btn1" android:text="1"/>
+    <Button android:id="@+id/btn2" android:text="2"/>
+    <Button android:id="@+id/btn3" android:text="3"/>
+    <Button android:id="@+id/btnSum" android:text="+"/>
+
+    <Button
+        android:id="@+id/btn0"
+        android:text="0"
+        android:layout_columnSpan="2"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"/>
+
+    <Button android:id="@+id/btnPunto" android:text="."/>
+    <Button android:id="@+id/btnIgual" android:text="="/>
+
+</GridLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".SecondActivity">
+
+  <TextView
+      android:id="@+id/textoTitulo"
+      android:layout_width="376dp"
+      android:layout_height="34dp"
+      android:gravity="center"
+      android:text="Calculo de IMC"
+      android:textSize="20dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+
+  <TextView
+      android:id="@+id/resultadoIMC"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text=""
+      android:textSize="32dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textoTitulo"
+      android:layout_marginTop="100dp"
+      />
+
+  <TextView
+      android:id="@+id/resultadoCategoria"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="50dp"
+      android:text=""
+      android:textSize="32dp"
+      app:layout_constraintStart_toStartOf="@+id/resultadoIMC"
+      app:layout_constraintTop_toBottomOf="@+id/resultadoIMC" />
+
+  <ImageView
+      android:id="@+id/resultadoImagen"
+      android:layout_width="99dp"
+      android:layout_height="103dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/resultadoIMC" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

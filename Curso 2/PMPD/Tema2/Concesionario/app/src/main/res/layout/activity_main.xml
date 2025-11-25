@@ -27,11 +27,11 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerVehiculos" />
 
     <ImageView
-        android:src=""
         android:id="@+id/imagenMarca"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="24dp"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toTopOf="@+id/botonFiltrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textoTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Calculo de IMC"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textoAltura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:hint="Introduce altura"
+        app:layout_constraintTop_toBottomOf="@+id/textoTitulo"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/textoPeso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:hint="Introduce peso"
+        app:layout_constraintTop_toBottomOf="@+id/textoAltura"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <RadioGroup
+        android:layout_marginTop="20dp"
+        android:id="@+id/botonesGenero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textoPeso"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/botonMasculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masculino" />
+
+        <RadioButton
+            android:layout_marginLeft="20dp"
+            android:id="@+id/botonFemenino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Femenino" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/botonCalculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calcular IMC"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/textoPeso"
+        app:layout_constraintStart_toStartOf="@+id/textoPeso"
+        app:layout_constraintTop_toBottomOf="@+id/botonesGenero" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
