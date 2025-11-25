@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.pizzeria.controller.DetalleController" prefWidth="400" prefHeight="300">
+    <children>
+        <TextArea fx:id="textAreaDetalle" layoutX="20" layoutY="20" prefWidth="360" prefHeight="260" editable="false" wrapText="true"/>
+    </children>
+</AnchorPane>
