@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetalleActivity"
+    android:padding="24dp"
+    >
+
+    <ImageView
+        android:id="@+id/imagenProductoDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="24dp" />
+
+    <TextView
+        android:id="@+id/textoNombreDetalle"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del producto"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/imagenProductoDetalle"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <TextView
+        android:id="@+id/textoPrecioDetalle"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Precio:"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textoNombreDetalle"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <TextView
+        android:id="@+id/textoCategoriaDetalle"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Categoría:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/textoPrecioDetalle"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <TextView
+        android:id="@+id/textoDescripcionDetalle"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto..."
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/textoCategoriaDetalle"
+        tools:layout_editor_absoluteX="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

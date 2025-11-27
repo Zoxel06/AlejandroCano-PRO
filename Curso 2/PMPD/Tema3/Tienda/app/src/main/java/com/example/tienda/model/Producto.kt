@@ -12,6 +12,8 @@ class Producto(
     var imagen: String
 ) : Serializable {
 
-
+    override fun toString(): String {
+        return super.toString()
+    }
 
 }

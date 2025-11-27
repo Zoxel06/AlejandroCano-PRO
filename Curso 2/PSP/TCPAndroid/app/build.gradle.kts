@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tienda"
+    namespace = "com.example.tcpandroid"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.tienda"
+        applicationId = "com.example.tcpandroid"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -35,7 +35,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
     viewBinding {
         enable = true
     }
@@ -50,5 +49,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.github.bumptech.glide:glide:5.0.5")
 }
