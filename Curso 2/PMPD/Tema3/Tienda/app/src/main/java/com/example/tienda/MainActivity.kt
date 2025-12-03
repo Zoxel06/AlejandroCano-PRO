@@ -14,7 +14,7 @@ import com.example.tienda.databinding.ActivityMainBinding
 import com.example.tienda.dataset.DataSet
 import com.example.tienda.model.Producto
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterProducto.OnProductoCarritoListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapterProducto: AdapterProducto
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +40,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerProductos.adapter = adapterProducto
 
+    }
+
+    override fun actualizarContadorCarrito() {
+        binding.textoContador.text = DataSet.listaCarrito.size.toString()
     }
 }
