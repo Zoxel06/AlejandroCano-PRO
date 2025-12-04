@@ -46,4 +46,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("com.google.android.gms:play-services-location:21.1.0")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.7.1")
+
 }
