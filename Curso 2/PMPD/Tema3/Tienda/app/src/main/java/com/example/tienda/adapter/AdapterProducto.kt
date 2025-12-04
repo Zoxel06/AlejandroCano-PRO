@@ -15,81 +15,65 @@ import com.google.android.material.snackbar.Snackbar
 
 class AdapterProducto(var lista: ArrayList<Producto>, var contexto: Context) :
     RecyclerView.Adapter<AdapterProducto.MyHolder>() {
-
-    lateinit var listener: OnProductoCarritoListener
+    var listener: OnProductoCarritoListener
 
     init {
         listener = contexto as OnProductoCarritoListener
     }
 
 
+    inner class MyHolder(var binding: ItemProductoBinding) : RecyclerView.ViewHolder(binding.root)
+
+    // crea un holder de la clase anidada
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MyHolder {
         var binding: ItemProductoBinding =
             ItemProductoBinding.inflate(LayoutInflater.from(contexto), parent, false)
-
         return MyHolder(binding)
     }
 
+    // asociar los elementos (posicion) con el holder asociado
     override fun onBindViewHolder(
         holder: MyHolder,
         position: Int
     ) {
 
-
-        val producto: Producto = lista[position] // o lista.get(position)
-
+        val producto: Producto = lista[position]
         Glide.with(contexto)
             .load(producto.imagen)
             .placeholder(R.drawable.producto)
             .into(holder.binding.imagenFila)
 
+
         holder.binding.nombreFila.text = producto.nombre
         holder.binding.btnDetalle.setOnClickListener {
-            Snackbar.make(
-                holder.binding.root,
-                "El precio del articulo es ${producto.precio}",
-                Snackbar.LENGTH_SHORT
-            ).show()
-
-            // Arrancar otra pantalla y sacar los datos del producto
-
-        }
-        holder.binding.btnCompra.setOnClickListener {
-            Snackbar.make(
-                holder.binding.root,
-                "El stock del articulo es ${producto.stock}",
-                Snackbar.LENGTH_SHORT
-            ).show()
-
-            DataSet.addProducto(producto)
-
-        }
-
-        holder.binding.btnDetalle.setOnClickListener {
-            val intent = Intent(contexto, DetalleActivity::class.java)
+            val intent: Intent = Intent(contexto, DetalleActivity::class.java)
             intent.putExtra("producto", producto)
             contexto.startActivity(intent)
-
+        }
+        holder.binding.btnCompra.setOnClickListener {
+            DataSet.addProducto(producto)
+            // lanzar la accion de add carrito
             listener.actualizarContadorCarrito()
-
         }
     }
 
+    // cuantos elementso tendre que pintar
     override fun getItemCount(): Int {
         return lista.size
     }
 
-    inner class MyHolder(var binding: ItemProductoBinding) : RecyclerView.ViewHolder(binding.root) {
-        // Aquí puedes inicializar las vistas del item
-
+    fun changeList(lista: ArrayList<Producto>){
+        this.lista = lista;
+        notifyDataSetChanged()
+        // notificaciones individuales
     }
 
     interface OnProductoCarritoListener {
-
         fun actualizarContadorCarrito(): Unit
+
 
     }
 
