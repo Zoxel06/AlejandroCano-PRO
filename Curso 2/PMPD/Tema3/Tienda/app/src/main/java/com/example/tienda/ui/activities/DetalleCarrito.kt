@@ -1,11 +1,11 @@
-package com.example.tienda.ui
+package com.example.tienda.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tienda.adapter.AdapterProducto
-import com.example.tienda.dataset.DataSet
 import com.example.tienda.databinding.CarritoDetalleBinding
+import com.example.tienda.dataset.DataSet
 
 class DetalleCarrito : AppCompatActivity(), AdapterProducto.OnProductoCarritoListener {
 
@@ -20,7 +20,7 @@ class DetalleCarrito : AppCompatActivity(), AdapterProducto.OnProductoCarritoLis
         setSupportActionBar(binding.toolbarCarrito)
         supportActionBar?.title = "Carrito"
 
-        adapterCarrito = AdapterProducto(DataSet.listaCarrito, this)
+        adapterCarrito = AdapterProducto(DataSet.Companion.listaCarrito, this)
         binding.recyclerCarrito.layoutManager = LinearLayoutManager(this)
         binding.recyclerCarrito.adapter = adapterCarrito
 
@@ -28,7 +28,7 @@ class DetalleCarrito : AppCompatActivity(), AdapterProducto.OnProductoCarritoLis
     }
 
     override fun actualizarContadorCarrito() {
-        binding.textoContador.text = DataSet.listaCarrito.size.toString()
+        binding.textoContador.text = DataSet.Companion.listaCarrito.size.toString()
         adapterCarrito.notifyDataSetChanged()
     }
 }

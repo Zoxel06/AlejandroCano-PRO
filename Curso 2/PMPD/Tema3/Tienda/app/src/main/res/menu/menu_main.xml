@@ -10,8 +10,10 @@
         android:title="Filtrar" />
     <item
         android:id="@+id/menu_limpiar"
-        android:title="Limpiar filtro"
-        app:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_delete"
-        />
+        android:title="Limpiar filtro"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_info"
+        android:title="Informacion" />
 </menu>
