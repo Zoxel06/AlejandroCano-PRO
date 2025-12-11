@@ -16,7 +16,9 @@ import com.example.tienda.adapter.AdapterProducto
 import com.example.tienda.databinding.ActivityMainBinding
 import com.example.tienda.dataset.DataSet
 import com.example.tienda.model.Producto
+import com.example.tienda.ui.activities.CarritoActivity
 import com.example.tienda.ui.activities.DetalleCarrito
+import com.example.tienda.ui.dialogs.DialogoInformacion
 
 class MainActivity : AppCompatActivity(),
     AdapterProducto.OnProductoCarritoListener {
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             // ver la activity del carrito
             R.id.menu_carrito -> {
-                val intent = Intent(this, DetalleCarrito::class.java)
+                val intent = Intent(this, CarritoActivity::class.java)
                 startActivity(intent)
             }
 
@@ -99,12 +101,13 @@ class MainActivity : AppCompatActivity(),
 
             // quito el filtro de la lista, y pongo todos los elementos
             R.id.menu_limpiar -> {
-                adapterProducto.changeList(DataSet.lista)
-                binding.spinnerCategorias.setSelection(0)
+                val listaFiltrada = DataSet.getListaFiltrada("Todas")
+                adapterProducto.changeList(listaFiltrada)
             }
 
             R.id.menu_info -> {
-
+                val dialogoInformacion: DialogoInformacion = DialogoInformacion()
+                dialogoInformacion.show(supportFragmentManager,null)
             }
         }
         return true;

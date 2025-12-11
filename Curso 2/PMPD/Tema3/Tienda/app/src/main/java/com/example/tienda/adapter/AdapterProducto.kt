@@ -11,7 +11,6 @@ import com.example.tienda.databinding.ItemProductoBinding
 import com.example.tienda.dataset.DataSet
 import com.example.tienda.model.Producto
 import com.example.tienda.ui.activities.DetalleActivity
-import com.google.android.material.snackbar.Snackbar
 
 class AdapterProducto(var lista: ArrayList<Producto>, var contexto: Context) :
     RecyclerView.Adapter<AdapterProducto.MyHolder>() {
