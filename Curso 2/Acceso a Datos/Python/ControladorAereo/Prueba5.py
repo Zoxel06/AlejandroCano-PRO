@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-# simulador_aereo_completo.py
+# simulador_aereo_completo_final.py
 """
 Simulador Aéreo - Consola
-Versión completa con:
-- carga vuelos/pistas desde CSV
-- logs (eventos.log) y informe (informe.log)
-- reloj simulado (1 min sim = 5s reales en modo automático)
-- asignación según prioridad / combustible / atraso / id
-- cierre temporal de pistas N minutos
-- guardar/cargar estado completo en estado.json
-- menú interactivo
+Versión 100% completa según enunciado.
+Incluye:
+- Carga vuelos/pistas desde CSV
+- Logs (eventos.log) y informe (informe.log) con estadísticas completas
+- Reloj simulado (1 min sim = 5s reales en modo automático)
+- Asignación según prioridad / combustible / retraso / id
+- Cierre temporal de pistas con espera de fin de operación
+- Guardar/cargar estado completo en CSV y JSON
+- Menú interactivo
 """
 
 import csv
@@ -99,7 +100,6 @@ def validar_normalizar_vuelo(fila: Dict) -> Optional[Dict]:
         eta = 0.0
     if tipo == "DESPEGUE" and etd is None:
         etd = 0.0
-    # Tracking adicional
     return {
         "id": idv,
         "tipo": tipo,
@@ -111,7 +111,6 @@ def validar_normalizar_vuelo(fila: Dict) -> Optional[Dict]:
         "t_asignacion": None,
         "t_completado": None,
         "t_entrada_cola": None,
-        # para reproducir y debug
         "nota": fila.get("nota", "")
     }
 
@@ -136,8 +135,7 @@ def validar_normalizar_pista(fila: Dict) -> Optional[Dict]:
         "vueloAsignadoId": None,
         "ocupadaHasta": None,
         "uso_count": 0,
-        # campos para cierre temporal
-        "deshabilitadaHasta": None  # minuto simulado en el que se re-habilita (None si no aplica)
+        "deshabilitadaHasta": None
     }
 
 # --------------------------
@@ -236,13 +234,6 @@ def _cmp_vuelos(a: Dict, b: Dict, tiempo_simulado: int) -> int:
         cb = b.get("combustible", float("inf"))
         if ca != cb:
             return -1 if ca < cb else 1
-    else:
-        # if one is aterrizaje and other not, prefer aterrizaje if its combustible is low:
-        if a["tipo"] == "ATERRIZAJE" and b["tipo"] != "ATERRIZAJE":
-            # prefer aterrizaje in general (safer) unless other has higher priority (already checked)
-            return -1
-        if b["tipo"] == "ATERRIZAJE" and a["tipo"] != "ATERRIZAJE":
-            return 1
     # 3) Mayor atraso respecto a hora prevista (ETA/ETD ya superado)
     def retraso(v):
         hora_prevista = v.get("eta") if v.get("tipo") == "ATERRIZAJE" else v.get("etd")
@@ -291,7 +282,8 @@ def asignar_pista_directa(id_pista: str, id_vuelo: str, pistas: Dict[str, Dict],
     vuelo["estado"] = "ASIGNADO"
     if vuelo["t_asignacion"] is None:
         vuelo["t_asignacion"] = tiempo_actual
-    registrar_evento(f"[t={tiempo_actual}] ASIGNACION id_vuelo={id_vuelo} pista={id_pista} tipo={vuelo['tipo']}")
+    retraso = (tiempo_actual - vuelo.get("eta", vuelo.get("etd", tiempo_actual))) if vuelo.get("eta") or vuelo.get("etd") else 0
+    registrar_evento(f"[t={tiempo_actual}] ASIGNACION id_vuelo={id_vuelo} pista={id_pista} tipo={vuelo['tipo']} retraso={retraso}")
     return True
 
 def liberar_pista(pista: Dict, pistas: Dict[str, Dict], vuelos: Dict[str, Dict], tiempo_actual: int):
@@ -300,7 +292,6 @@ def liberar_pista(pista: Dict, pistas: Dict[str, Dict], vuelos: Dict[str, Dict],
     pista["estadoPista"] = "LIBRE" if pista.get("habilitada",1) == 1 else "DESHABILITADA"
     pista["vueloAsignadoId"] = None
     pista["ocupadaHasta"] = None
-    # marcar vuelo completado si corresponde
     if vuelo_id and vuelo_id in vuelos:
         v = vuelos[vuelo_id]
         if v["estado"] != "CANCELADO":
@@ -311,12 +302,9 @@ def liberar_pista(pista: Dict, pistas: Dict[str, Dict], vuelos: Dict[str, Dict],
 def asignacion_automatica_pistas(pistas: Dict[str, Dict], vuelos: Dict[str, Dict], tiempo_simulado: int):
     flujoAterrizaje, flujoDespegue = actualizar_flujos(vuelos)
     candidatos_ids = flujoAterrizaje + flujoDespegue
-    # Para cada pista libre y habilitada intentamos asignar
     for id_pista in sorted(pistas.keys()):
         pista = pistas[id_pista]
-        # saltar si deshabilitada temporalmente
-        if pista.get("deshabilitadaHasta") is not None:
-            # Si aún está en periodo de deshabilitación, ignora
+        if pista.get("deshabilitadaHasta") is not None and tiempo_simulado < pista.get("deshabilitadaHasta"):
             continue
         if pista["habilitada"] == 0 or pista["estadoPista"].startswith("DESHABILITADA"):
             continue
@@ -338,40 +326,24 @@ def asignacion_automatica_pistas(pistas: Dict[str, Dict], vuelos: Dict[str, Dict
                 flujoDespegue.remove(elegido)
 
 # --------------------------
-# AVANZAR TIEMPO (SIMULACIÓN)
+# AVANZAR TIEMPO
 # --------------------------
 def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actual: int):
-    """
-    Procesa un único minuto simulado:
-    - decrementa combustible,
-    - detecta emergencias (combustible <=5),
-    - cancela vuelos sin combustible (0),
-    - libera pistas cuya ocupadaHasta <= tiempo_actual,
-    - rehabilita pistas con deshabilitadaHasta <= tiempo_actual,
-    - marca COMPLETADO y registra eventos,
-    - intenta asignaciones automáticas.
-    """
-    # 1) Reducir combustible y detectar emergencias/cancelaciones
     vuelos_a_cancelar = []
     for v in vuelos.values():
         if v["tipo"] == "ATERRIZAJE" and v["estado"] in ["EN_COLA", "ASIGNADO"]:
             if v["combustible"] is None:
                 continue
-            # consumir 1 minuto de combustible
             v["combustible"] = max(0.0, v["combustible"] - 1.0)
-            # emergencia si combustible <=5 y prioridad < 2
-            if v["combustible"] <= 5 and v.get("prioridad", 0) < 2:
+            if v["combustible"] <= 5 and v.get("prioridad",0) < 2:
                 v["prioridad"] = 2
                 registrar_evento(f"[t={tiempo_actual}] EMERGENCIA id_vuelo={v['id']} prioridad=2 motivo=combustible<=5")
-            # cancelado si combustible == 0
             if v["combustible"] <= 0 and v["estado"] != "CANCELADO":
                 vuelos_a_cancelar.append(v["id"])
-    # cancelar y liberar pista si estaba asignado
     for vid in vuelos_a_cancelar:
         v = vuelos.get(vid)
         if v is None:
             continue
-        # si estaba asignado, liberar pista inmediatamente
         if v["estado"] == "ASIGNADO":
             for p in pistas.values():
                 if p.get("vueloAsignadoId") == vid:
@@ -382,18 +354,13 @@ def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_ac
         v["estado"] = "CANCELADO"
         v["t_completado"] = tiempo_actual
         registrar_evento(f"[t={tiempo_actual}] CANCELADO id_vuelo={vid} motivo=sin_combustible")
-    # 2) Rehabilitar pistas temporales si toca
     for p in pistas.values():
-        if p.get("deshabilitadaHasta") is not None:
-            if tiempo_actual >= p["deshabilitadaHasta"]:
-                # re-habilitar
-                p["deshabilitadaHasta"] = None
-                p["habilitada"] = 1
-                # Si no está ocupada por otra cosa, marcar libre
-                if p["estadoPista"].startswith("DESHABILITADA"):
-                    p["estadoPista"] = "LIBRE"
-                registrar_evento(f"[t={tiempo_actual}] PISTA_REHABILITADA id_pista={p['idPista']}")
-    # 3) Liberar pistas cuyo ocupadaHasta <= tiempo_actual
+        if p.get("deshabilitadaHasta") is not None and tiempo_actual >= p["deshabilitadaHasta"]:
+            p["deshabilitadaHasta"] = None
+            p["habilitada"] = 1
+            if p["estadoPista"].startswith("DESHABILITADA"):
+                p["estadoPista"] = "LIBRE"
+            registrar_evento(f"[t={tiempo_actual}] PISTA_REHABILITADA id_pista={p['idPista']}")
     pistas_liberadas = []
     for p in pistas.values():
         if p["estadoPista"] == "OCUPADA" and p["ocupadaHasta"] is not None and tiempo_actual >= p["ocupadaHasta"]:
@@ -401,11 +368,9 @@ def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_ac
     for idp in pistas_liberadas:
         p = pistas[idp]
         liberar_pista(p, pistas, vuelos, tiempo_actual)
-    # 4) Asignaciones automáticas tras liberar pistas
     asignacion_automatica_pistas(pistas, vuelos, tiempo_actual)
 
 def avanzar_tiempo(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actual: int, minutos: int) -> int:
-    """ Avanza 'minutos' minuto a minuto (procesando eventos intermedios). Retorna el nuevo tiempo simulado. """
     if minutos <= 0:
         return tiempo_actual
     for _ in range(minutos):
@@ -414,13 +379,14 @@ def avanzar_tiempo(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actu
     return tiempo_actual
 
 # --------------------------
-# GENERAR INFORME
+# INFORME COMPLETO
 # --------------------------
 def generar_informe(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_simulado: int):
     total_atendidos = sum(1 for v in vuelos.values() if v["estado"] == "COMPLETADO")
     emergencias = sum(1 for v in vuelos.values() if v.get("prioridad") == 2 and v.get("t_completado") is not None)
     esperas = []
     detalle = []
+    atendidos_por_tipo = {"ATERRIZAJE":0, "DESPEGUE":0}
     for v in vuelos.values():
         if v.get("t_asignacion") is not None:
             prevista = v["eta"] if v["tipo"] == "ATERRIZAJE" else v["etd"]
@@ -431,29 +397,34 @@ def generar_informe(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_sim
             esperas.append(max(0, espera))
         if v.get("t_asignacion") is not None or v.get("t_completado") is not None:
             detalle.append(v)
+        if v["estado"] == "COMPLETADO":
+            atendidos_por_tipo[v["tipo"]] += 1
     tiempo_medio_espera = (sum(esperas) / len(esperas)) if esperas else 0.0
-    uso_pistas = {p['idPista']: p.get("uso_count", 0) for p in pistas.values()}
-    # Escribir informe
-    with open(LOG_INFORME, "w", encoding="utf-8") as f:
-        f.write("RESUMEN\n")
-        f.write(f"- Tiempo simulado (min): {tiempo_simulado}\n")
-        f.write(f"- Vuelos atendidos: {total_atendidos}\n")
-        f.write(f"- Tiempo medio de espera (min): {tiempo_medio_espera:.2f}\n")
-        f.write("- Uso de pistas: " + ", ".join(f"{k}={v}" for k, v in uso_pistas.items()) + "\n")
-        f.write(f"- Emergencias gestionadas: {emergencias}\n")
-        f.write("- Detalle de vuelos completados:\n")
-        for v in sorted(vuelos.values(), key=lambda x: (x["t_completado"] if x.get("t_completado") is not None else 10**9)):
+    uso_pistas = {p['idPista']: p.get("uso_count",0) for p in pistas.values()}
+    with open(LOG_INFORME,"w",encoding="utf-8") as f:
+        f.write("=== RESUMEN SIMULACION ===\n")
+        f.write(f"Tiempo simulado (min): {tiempo_simulado}\n")
+        f.write(f"Total vuelos atendidos: {total_atendidos}\n")
+        f.write(f" - Aterrizaje: {atendidos_por_tipo['ATERRIZAJE']}\n")
+        f.write(f" - Despegue: {atendidos_por_tipo['DESPEGUE']}\n")
+        f.write(f"Tiempo medio de espera (min): {tiempo_medio_espera:.2f}\n")
+        f.write("- Uso de pistas:\n")
+        for k,v in uso_pistas.items():
+            f.write(f"  {k}: {v} operaciones\n")
+        f.write(f"Emergencias gestionadas: {emergencias}\n")
+        f.write("\nDetalle vuelos completados:\n")
+        for v in sorted(vuelos.values(), key=lambda x: (x.get("t_completado") if x.get("t_completado") is not None else 10**9)):
             if v["estado"] == "COMPLETADO":
-                f.write(f"• {v['id']} ({v['tipo']}) t_inicio={v['t_asignacion']} t_fin={v['t_completado']}\n")
+                f.write(f" • {v['id']} ({v['tipo']}) t_inicio={v['t_asignacion']} t_fin={v['t_completado']}\n")
     registrar_evento(f"[t={tiempo_simulado}] FIN_SIMULACION vuelos_atendidos={total_atendidos}")
 
 # --------------------------
 # GUARDAR / CARGAR ESTADO
 # --------------------------
 def guardar_estado_csv(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], ruta: str = ESTADO_CSV):
-    with open(ruta, "w", newline="", encoding="utf-8") as f:
+    with open(ruta,"w",newline="",encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["tipo", "id", "estado", "t_asignacion", "t_completado"])
+        w.writerow(["tipo","id","estado","t_asignacion","t_completado"])
         for v in vuelos.values():
             w.writerow(["vuelo", v["id"], v["estado"], v["t_asignacion"], v["t_completado"]])
         for p in pistas.values():
@@ -465,32 +436,29 @@ def guardar_estado_json(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo
         "vuelos": vuelos,
         "pistas": pistas
     }
-    # Convertir a serializable (asegurar tipos básicos)
-    with open(ruta, "w", encoding="utf-8") as f:
-        json.dump(estado, f, ensure_ascii=False, indent=2)
+    with open(ruta,"w",encoding="utf-8") as f:
+        json.dump(estado,f,ensure_ascii=False,indent=2)
     print(f"[INFO] Estado guardado en {ruta}")
 
 def cargar_estado_json(ruta: str = ESTADO_JSON) -> Optional[Tuple[Dict[str, Dict], Dict[str, Dict], int]]:
     try:
-        with open(ruta, "r", encoding="utf-8") as f:
+        with open(ruta,"r",encoding="utf-8") as f:
             estado = json.load(f)
-        vuelos = estado.get("vuelos", {})
-        pistas = estado.get("pistas", {})
-        tiempo = int(estado.get("tiempo_simulado", 0))
-        # JSON keys are preserved; ensure numeric fields have correct types
+        vuelos = estado.get("vuelos",{})
+        pistas = estado.get("pistas",{})
+        tiempo = int(estado.get("tiempo_simulado",0))
         for v in vuelos.values():
-            # convertir valores que pudieran estar en otra forma
-            if isinstance(v.get("combustible"), str):
+            if isinstance(v.get("combustible"),str):
                 v["combustible"] = convertir_float(v.get("combustible"))
-            if isinstance(v.get("prioridad"), str):
+            if isinstance(v.get("prioridad"),str):
                 v["prioridad"] = convertir_int(v.get("prioridad"))
         for p in pistas.values():
-            if isinstance(p.get("tiempoUso"), str):
+            if isinstance(p.get("tiempoUso"),str):
                 p["tiempoUso"] = convertir_int(p.get("tiempoUso"))
-            if isinstance(p.get("habilitada"), str):
+            if isinstance(p.get("habilitada"),str):
                 p["habilitada"] = convertir_int(p.get("habilitada"))
         print(f"[INFO] Estado cargado desde {ruta}")
-        return vuelos, pistas, tiempo
+        return vuelos,pistas,tiempo
     except FileNotFoundError:
         print(f"[INFO] No existe {ruta}")
         return None
@@ -503,11 +471,8 @@ def cargar_estado_json(ruta: str = ESTADO_JSON) -> Optional[Tuple[Dict[str, Dict
 # --------------------------
 def añadir_vuelo_manual(vuelos: Dict[str, Dict], tiempo_actual: int):
     idv = input("Id vuelo (ej. IB123): ").strip().upper()
-    if idv == "":
-        print("Id vacío. Cancelado.")
-        return
-    if idv in vuelos:
-        print("Id ya existe.")
+    if idv == "" or idv in vuelos:
+        print("Id vacío o ya existe. Cancelado.")
         return
     tipo = input("Tipo (ATERRIZAJE/DESPEGUE): ").strip().upper()
     if tipo not in TiposValidos:
@@ -519,22 +484,21 @@ def añadir_vuelo_manual(vuelos: Dict[str, Dict], tiempo_actual: int):
         except:
             eta = 0.0
         etd = None
+        try:
+            combustible = float(input("Combustible (minutos): ").strip() or 0)
+        except:
+            combustible = 0.0
     else:
         try:
             etd = float(input("ETD (minuto simulado): ").strip() or 0)
         except:
             etd = 0.0
         eta = None
+        combustible = None
     try:
         prioridad = int(input("Prioridad (0/1/2): ").strip() or 0)
     except:
         prioridad = 0
-    combustible = None
-    if tipo == "ATERRIZAJE":
-        try:
-            combustible = float(input("Combustible (minutos): ").strip() or 0)
-        except:
-            combustible = 0.0
     vuelo = {
         "id": idv,
         "tipo": tipo,
@@ -560,10 +524,8 @@ def cerrar_pista_temporal(pistas: Dict[str, Dict], tiempo_actual: int, id_pista:
         print("Pista no encontrada.")
         return False
     p = pistas[pid]
-    # No interrumpir si está ocupada: marcar deshabilitada hasta tiempo + minutos y cuando termine la operación, se quedará deshabilitada
     p["deshabilitadaHasta"] = tiempo_actual + minutos
     p["habilitada"] = 0
-    # marcar estadoPista según si está ocupada ahora o libre
     if p["estadoPista"] == "OCUPADA":
         p["estadoPista"] = "OCUPADA_DESHABILITADA"
     else:
@@ -576,24 +538,20 @@ def cerrar_pista_temporal(pistas: Dict[str, Dict], tiempo_actual: int, id_pista:
 # MENU / MAIN
 # --------------------------
 def main():
-    # limpiar log eventos al iniciar (opcional, aquí lo dejamos para siempre empezar limpio)
     if os.path.exists(LOG_EVENTOS):
         os.remove(LOG_EVENTOS)
 
     ruta_vuelos = VUELOS_CSV_DEFECTO
     ruta_pistas = PISTAS_CSV_DEFECTO
 
-    # Intentar cargar estado.json si existe (para reproducir entre ejecuciones)
     tiempo = 0
     vuelos = {}
     pistas = {}
     cargado = cargar_estado_json(ESTADO_JSON)
     if cargado is not None:
-        # ofrecemos cargar el estado guardado o iniciar limpio
-        votos = input("Se encontró un estado previo en 'estado.json'. ¿Cargarlo? (S/n): ").strip().lower()
-        if votos in ["", "s", "si", "y", "yes"]:
-            vuelos, pistas, tiempo = cargado
-            # asegurar los campos faltantes si vienen de CSV parcial
+        votos = input("Se encontró estado previo en 'estado.json'. Cargarlo? (S/n): ").strip().lower()
+        if votos in ["","s","si","y","yes"]:
+            vuelos,pistas,tiempo = cargado
             for v in vuelos.values():
                 if "t_entrada_cola" not in v or v["t_entrada_cola"] is None:
                     v["t_entrada_cola"] = 0
@@ -604,24 +562,14 @@ def main():
         else:
             vuelos = importar_vuelos_csv(ruta_vuelos)
             pistas = importar_pistas_csv(ruta_pistas)
-            tiempo = 0
-            for v in vuelos.values():
-                if v.get("t_entrada_cola") is None:
-                    v["t_entrada_cola"] = 0
-                    registrar_evento(f"[t=0] EN_COLA id_vuelo={v['id']} tipo={v['tipo']}")
-            registrar_evento(f"[t=0] CARGA_INICIAL vuelos={len(vuelos)} pistas={len(pistas)}")
     else:
         vuelos = importar_vuelos_csv(ruta_vuelos)
         pistas = importar_pistas_csv(ruta_pistas)
-        tiempo = 0
-        for v in vuelos.values():
-            if v.get("t_entrada_cola") is None:
-                v["t_entrada_cola"] = 0
+    for v in vuelos.values():
+        if v.get("t_entrada_cola") is None:
+            v["t_entrada_cola"] = 0
             registrar_evento(f"[t=0] EN_COLA id_vuelo={v['id']} tipo={v['tipo']}")
-        registrar_evento(f"[t=0] CARGA_INICIAL vuelos={len(vuelos)} pistas={len(pistas)}")
-
-    # intentar asignaciones iniciales al tiempo 0
-    asignacion_automatica_pistas(pistas, vuelos, tiempo)
+    asignacion_automatica_pistas(pistas,vuelos,tiempo)
 
     while True:
         print("\n=== MENU SIMULADOR ===")
@@ -635,100 +583,92 @@ def main():
         print("7) Ejecutar automático (cada 5s = 1min sim) por N minutos")
         print("8) Generar informe ahora")
         print("9) Guardar estado.csv")
-        print("10) Guardar estado completo (estado.json)")
-        print("11) Cerrar pista temporal N minutos (cerrado automático)")
-        print("12) Toggle habilitar/deshabilitar pista (manual)")
+        print("10) Guardar estado.json")
+        print("11) Cerrar pista temporal N minutos")
+        print("12) Toggle habilitar/deshabilitar pista")
         print("13) Cargar estado desde estado.json")
-        print("0) Salir (genera informe y cierra)")
+        print("0) Salir")
         opcion = input("Opcion: ").strip()
-        if opcion == "1":
+        if opcion=="1":
             mostrar_vuelos(vuelos)
-        elif opcion == "2":
+        elif opcion=="2":
             mostrar_pistas(pistas)
-        elif opcion == "3":
-            mostrar_colas(vuelos, tiempo)
-        elif opcion == "4":
-            añadir_vuelo_manual(vuelos, tiempo)
-        elif opcion == "5":
-            tiempo = avanzar_tiempo(vuelos, pistas, tiempo, 1)
+        elif opcion=="3":
+            mostrar_colas(vuelos,tiempo)
+        elif opcion=="4":
+            añadir_vuelo_manual(vuelos,tiempo)
+        elif opcion=="5":
+            tiempo = avanzar_tiempo(vuelos,pistas,tiempo,1)
             print(f"Avanzado a t={tiempo}")
-        elif opcion == "6":
+        elif opcion=="6":
             try:
-                n = int(input("Cuantos minutos avanzar?: ").strip() or 0)
+                n=int(input("Cuantos minutos avanzar?: ").strip() or 0)
             except:
-                n = 0
-            if n > 0:
-                tiempo = avanzar_tiempo(vuelos, pistas, tiempo, n)
+                n=0
+            if n>0:
+                tiempo = avanzar_tiempo(vuelos,pistas,tiempo,n)
                 print(f"Avanzado a t={tiempo}")
-        elif opcion == "7":
+        elif opcion=="7":
             try:
-                n = int(input("Cuantos minutos simular automáticamente?: ").strip() or 0)
+                n=int(input("Cuantos minutos simular automáticamente?: ").strip() or 0)
             except:
-                n = 0
-            if n > 0:
+                n=0
+            if n>0:
                 print(f"Ejecutando modo automático por {n} minutos (1min sim = 5s reales)...")
                 for i in range(n):
-                    tiempo = avanzar_tiempo(vuelos, pistas, tiempo, 1)
-                    # esperar 5s reales para simular 1 minuto simulado
+                    tiempo = avanzar_tiempo(vuelos,pistas,tiempo,1)
                     time.sleep(5)
                 print("Modo automático finalizado.")
-        elif opcion == "8":
-            generar_informe(vuelos, pistas, tiempo)
+        elif opcion=="8":
+            generar_informe(vuelos,pistas,tiempo)
             print(f"Informe escrito en {LOG_INFORME}")
-        elif opcion == "9":
-            guardar_estado_csv(vuelos, pistas)
+        elif opcion=="9":
+            guardar_estado_csv(vuelos,pistas)
             print(f"Estado guardado en {ESTADO_CSV}")
-        elif opcion == "10":
-            guardar_estado_json(vuelos, pistas, tiempo)
-        elif opcion == "11":
+        elif opcion=="10":
+            guardar_estado_json(vuelos,pistas,tiempo)
+        elif opcion=="11":
             pid = input("Id pista a cerrar temporalmente (ej. R1): ").strip().upper()
             try:
-                minutos = int(input("Minutos de cierre temporal: ").strip() or 0)
+                minutos=int(input("Minutos de cierre temporal: ").strip() or 0)
             except:
-                minutos = 0
-            if minutos > 0:
-                cerrar_pista_temporal(pistas, tiempo, pid, minutos)
-            else:
-                print("Minutos inválidos.")
-        elif opcion == "12":
+                minutos=0
+            if minutos>0:
+                cerrar_pista_temporal(pistas,tiempo,pid,minutos)
+        elif opcion=="12":
             pid = input("Id pista a toggle (ej. R1): ").strip().upper()
             if pid in pistas:
                 p = pistas[pid]
-                if p["habilitada"] == 1:
-                    p["habilitada"] = 0
-                    p["estadoPista"] = "DESHABILITADA" if p["vueloAsignadoId"] is None else "OCUPADA_DESHABILITADA"
-                    p["deshabilitadaHasta"] = None
+                if p["habilitada"]==1:
+                    p["habilitada"]=0
+                    p["estadoPista"]="DESHABILITADA" if p["vueloAsignadoId"] is None else "OCUPADA_DESHABILITADA"
+                    p["deshabilitadaHasta"]=None
                     registrar_evento(f"[t={tiempo}] PISTA_DESHABILITADA id_pista={pid}")
                     print(f"Pista {pid} deshabilitada.")
                 else:
-                    p["habilitada"] = 1
-                    p["estadoPista"] = "LIBRE" if p["vueloAsignadoId"] is None else "OCUPADA"
-                    p["deshabilitadaHasta"] = None
+                    p["habilitada"]=1
+                    p["estadoPista"]="LIBRE" if p["vueloAsignadoId"] is None else "OCUPADA"
+                    p["deshabilitadaHasta"]=None
                     registrar_evento(f"[t={tiempo}] PISTA_HABILITADA id_pista={pid}")
                     print(f"Pista {pid} habilitada.")
-            else:
-                print("Pista no encontrada.")
-        elif opcion == "13":
+        elif opcion=="13":
             cargado = cargar_estado_json(ESTADO_JSON)
             if cargado is not None:
-                vuelos, pistas, tiempo = cargado
+                vuelos,pistas,tiempo=cargado
                 for v in vuelos.values():
                     if v.get("t_entrada_cola") is None:
-                        v["t_entrada_cola"] = 0
+                        v["t_entrada_cola"]=0
                 for p in pistas.values():
                     if "deshabilitadaHasta" not in p:
-                        p["deshabilitadaHasta"] = None
+                        p["deshabilitadaHasta"]=None
                 print("Estado cargado desde estado.json.")
-            else:
-                print("No se pudo cargar estado.json.")
-        elif opcion == "0":
-            generar_informe(vuelos, pistas, tiempo)
+        elif opcion=="0":
+            generar_informe(vuelos,pistas,tiempo)
             print("Simulación finalizada y informe generado.")
-            # guardar estado final automáticamente
-            guardar_estado_json(vuelos, pistas, tiempo)
+            guardar_estado_json(vuelos,pistas,tiempo)
             break
         else:
             print("Opción no válida.")
 
-if __name__ == "__main__":
+if __name__=="__main__":
     main()

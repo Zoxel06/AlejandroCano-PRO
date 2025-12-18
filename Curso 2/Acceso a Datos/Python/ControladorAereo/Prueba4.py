@@ -10,6 +10,8 @@ Versión completa con:
 - cierre temporal de pistas N minutos
 - guardar/cargar estado completo en estado.json
 - menú interactivo
+- cancelaciones manuales
+- replay desde logs
 """
 
 import csv
@@ -99,7 +101,6 @@ def validar_normalizar_vuelo(fila: Dict) -> Optional[Dict]:
         eta = 0.0
     if tipo == "DESPEGUE" and etd is None:
         etd = 0.0
-    # Tracking adicional
     return {
         "id": idv,
         "tipo": tipo,
@@ -111,7 +112,6 @@ def validar_normalizar_vuelo(fila: Dict) -> Optional[Dict]:
         "t_asignacion": None,
         "t_completado": None,
         "t_entrada_cola": None,
-        # para reproducir y debug
         "nota": fila.get("nota", "")
     }
 
@@ -136,8 +136,7 @@ def validar_normalizar_pista(fila: Dict) -> Optional[Dict]:
         "vueloAsignadoId": None,
         "ocupadaHasta": None,
         "uso_count": 0,
-        # campos para cierre temporal
-        "deshabilitadaHasta": None  # minuto simulado en el que se re-habilita (None si no aplica)
+        "deshabilitadaHasta": None
     }
 
 # --------------------------
@@ -223,27 +222,22 @@ def actualizar_flujos(vuelos: Dict[str, Dict]) -> Tuple[List[str], List[str]]:
     return aterrizaje, despegue
 
 def _cmp_vuelos(a: Dict, b: Dict, tiempo_simulado: int) -> int:
-    # 1) Emergencias (prioridad == 2)
     pa = a.get("prioridad", 0)
     pb = b.get("prioridad", 0)
     if pa == 2 and pb != 2:
         return -1
     if pb == 2 and pa != 2:
         return 1
-    # 2) Aterrizajes con menor combustible (solo si ambos son aterrizajes)
     if a["tipo"] == "ATERRIZAJE" and b["tipo"] == "ATERRIZAJE":
         ca = a.get("combustible", float("inf"))
         cb = b.get("combustible", float("inf"))
         if ca != cb:
             return -1 if ca < cb else 1
     else:
-        # if one is aterrizaje and other not, prefer aterrizaje if its combustible is low:
         if a["tipo"] == "ATERRIZAJE" and b["tipo"] != "ATERRIZAJE":
-            # prefer aterrizaje in general (safer) unless other has higher priority (already checked)
             return -1
         if b["tipo"] == "ATERRIZAJE" and a["tipo"] != "ATERRIZAJE":
             return 1
-    # 3) Mayor atraso respecto a hora prevista (ETA/ETD ya superado)
     def retraso(v):
         hora_prevista = v.get("eta") if v.get("tipo") == "ATERRIZAJE" else v.get("etd")
         if hora_prevista is None:
@@ -253,7 +247,6 @@ def _cmp_vuelos(a: Dict, b: Dict, tiempo_simulado: int) -> int:
     rb = retraso(b)
     if ra != rb:
         return -1 if ra > rb else 1
-    # 4) Desempate alfabético por id
     if a["id"] < b["id"]:
         return -1
     if a["id"] > b["id"]:
@@ -300,7 +293,6 @@ def liberar_pista(pista: Dict, pistas: Dict[str, Dict], vuelos: Dict[str, Dict],
     pista["estadoPista"] = "LIBRE" if pista.get("habilitada",1) == 1 else "DESHABILITADA"
     pista["vueloAsignadoId"] = None
     pista["ocupadaHasta"] = None
-    # marcar vuelo completado si corresponde
     if vuelo_id and vuelo_id in vuelos:
         v = vuelos[vuelo_id]
         if v["estado"] != "CANCELADO":
@@ -311,13 +303,11 @@ def liberar_pista(pista: Dict, pistas: Dict[str, Dict], vuelos: Dict[str, Dict],
 def asignacion_automatica_pistas(pistas: Dict[str, Dict], vuelos: Dict[str, Dict], tiempo_simulado: int):
     flujoAterrizaje, flujoDespegue = actualizar_flujos(vuelos)
     candidatos_ids = flujoAterrizaje + flujoDespegue
-    # Para cada pista libre y habilitada intentamos asignar
     for id_pista in sorted(pistas.keys()):
         pista = pistas[id_pista]
-        # saltar si deshabilitada temporalmente
         if pista.get("deshabilitadaHasta") is not None:
-            # Si aún está en periodo de deshabilitación, ignora
-            continue
+            if tiempo_simulado < pista["deshabilitadaHasta"]:
+                continue
         if pista["habilitada"] == 0 or pista["estadoPista"].startswith("DESHABILITADA"):
             continue
         if pista["estadoPista"] != "LIBRE":
@@ -338,40 +328,24 @@ def asignacion_automatica_pistas(pistas: Dict[str, Dict], vuelos: Dict[str, Dict
                 flujoDespegue.remove(elegido)
 
 # --------------------------
-# AVANZAR TIEMPO (SIMULACIÓN)
+# AVANZAR TIEMPO
 # --------------------------
 def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actual: int):
-    """
-    Procesa un único minuto simulado:
-    - decrementa combustible,
-    - detecta emergencias (combustible <=5),
-    - cancela vuelos sin combustible (0),
-    - libera pistas cuya ocupadaHasta <= tiempo_actual,
-    - rehabilita pistas con deshabilitadaHasta <= tiempo_actual,
-    - marca COMPLETADO y registra eventos,
-    - intenta asignaciones automáticas.
-    """
-    # 1) Reducir combustible y detectar emergencias/cancelaciones
     vuelos_a_cancelar = []
     for v in vuelos.values():
         if v["tipo"] == "ATERRIZAJE" and v["estado"] in ["EN_COLA", "ASIGNADO"]:
             if v["combustible"] is None:
                 continue
-            # consumir 1 minuto de combustible
             v["combustible"] = max(0.0, v["combustible"] - 1.0)
-            # emergencia si combustible <=5 y prioridad < 2
             if v["combustible"] <= 5 and v.get("prioridad", 0) < 2:
                 v["prioridad"] = 2
                 registrar_evento(f"[t={tiempo_actual}] EMERGENCIA id_vuelo={v['id']} prioridad=2 motivo=combustible<=5")
-            # cancelado si combustible == 0
             if v["combustible"] <= 0 and v["estado"] != "CANCELADO":
                 vuelos_a_cancelar.append(v["id"])
-    # cancelar y liberar pista si estaba asignado
     for vid in vuelos_a_cancelar:
         v = vuelos.get(vid)
         if v is None:
             continue
-        # si estaba asignado, liberar pista inmediatamente
         if v["estado"] == "ASIGNADO":
             for p in pistas.values():
                 if p.get("vueloAsignadoId") == vid:
@@ -382,18 +356,14 @@ def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_ac
         v["estado"] = "CANCELADO"
         v["t_completado"] = tiempo_actual
         registrar_evento(f"[t={tiempo_actual}] CANCELADO id_vuelo={vid} motivo=sin_combustible")
-    # 2) Rehabilitar pistas temporales si toca
     for p in pistas.values():
         if p.get("deshabilitadaHasta") is not None:
             if tiempo_actual >= p["deshabilitadaHasta"]:
-                # re-habilitar
                 p["deshabilitadaHasta"] = None
                 p["habilitada"] = 1
-                # Si no está ocupada por otra cosa, marcar libre
                 if p["estadoPista"].startswith("DESHABILITADA"):
                     p["estadoPista"] = "LIBRE"
                 registrar_evento(f"[t={tiempo_actual}] PISTA_REHABILITADA id_pista={p['idPista']}")
-    # 3) Liberar pistas cuyo ocupadaHasta <= tiempo_actual
     pistas_liberadas = []
     for p in pistas.values():
         if p["estadoPista"] == "OCUPADA" and p["ocupadaHasta"] is not None and tiempo_actual >= p["ocupadaHasta"]:
@@ -401,11 +371,9 @@ def _procesar_minuto(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_ac
     for idp in pistas_liberadas:
         p = pistas[idp]
         liberar_pista(p, pistas, vuelos, tiempo_actual)
-    # 4) Asignaciones automáticas tras liberar pistas
     asignacion_automatica_pistas(pistas, vuelos, tiempo_actual)
 
 def avanzar_tiempo(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actual: int, minutos: int) -> int:
-    """ Avanza 'minutos' minuto a minuto (procesando eventos intermedios). Retorna el nuevo tiempo simulado. """
     if minutos <= 0:
         return tiempo_actual
     for _ in range(minutos):
@@ -433,7 +401,6 @@ def generar_informe(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_sim
             detalle.append(v)
     tiempo_medio_espera = (sum(esperas) / len(esperas)) if esperas else 0.0
     uso_pistas = {p['idPista']: p.get("uso_count", 0) for p in pistas.values()}
-    # Escribir informe
     with open(LOG_INFORME, "w", encoding="utf-8") as f:
         f.write("RESUMEN\n")
         f.write(f"- Tiempo simulado (min): {tiempo_simulado}\n")
@@ -465,7 +432,6 @@ def guardar_estado_json(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo
         "vuelos": vuelos,
         "pistas": pistas
     }
-    # Convertir a serializable (asegurar tipos básicos)
     with open(ruta, "w", encoding="utf-8") as f:
         json.dump(estado, f, ensure_ascii=False, indent=2)
     print(f"[INFO] Estado guardado en {ruta}")
@@ -477,9 +443,7 @@ def cargar_estado_json(ruta: str = ESTADO_JSON) -> Optional[Tuple[Dict[str, Dict
         vuelos = estado.get("vuelos", {})
         pistas = estado.get("pistas", {})
         tiempo = int(estado.get("tiempo_simulado", 0))
-        # JSON keys are preserved; ensure numeric fields have correct types
         for v in vuelos.values():
-            # convertir valores que pudieran estar en otra forma
             if isinstance(v.get("combustible"), str):
                 v["combustible"] = convertir_float(v.get("combustible"))
             if isinstance(v.get("prioridad"), str):
@@ -552,48 +516,101 @@ def añadir_vuelo_manual(vuelos: Dict[str, Dict], tiempo_actual: int):
     print(f"Vuelo {idv} añadido y en cola.")
 
 # --------------------------
-# CIERRE TEMPORAL DE PISTA
+# CANCELACIÓN MANUAL
 # --------------------------
-def cerrar_pista_temporal(pistas: Dict[str, Dict], tiempo_actual: int, id_pista: str, minutos: int):
-    pid = id_pista.strip().upper()
-    if pid not in pistas:
-        print("Pista no encontrada.")
-        return False
-    p = pistas[pid]
-    # No interrumpir si está ocupada: marcar deshabilitada hasta tiempo + minutos y cuando termine la operación, se quedará deshabilitada
-    p["deshabilitadaHasta"] = tiempo_actual + minutos
-    p["habilitada"] = 0
-    # marcar estadoPista según si está ocupada ahora o libre
-    if p["estadoPista"] == "OCUPADA":
-        p["estadoPista"] = "OCUPADA_DESHABILITADA"
-    else:
-        p["estadoPista"] = "DESHABILITADA"
-    registrar_evento(f"[t={tiempo_actual}] PISTA_DESHABILITADA_TEMP id_pista={pid} minutos={minutos}")
-    print(f"Pista {pid} cerrada temporalmente hasta t={p['deshabilitadaHasta']}.")
-    return True
+def cancelar_vuelo_manual(vuelos: Dict[str, Dict], pistas: Dict[str, Dict], tiempo_actual: int):
+    idv = input("Id del vuelo a cancelar: ").strip().upper()
+    if idv not in vuelos:
+        print("Vuelo no encontrado.")
+        return
+    v = vuelos[idv]
+    if v["estado"] in ["COMPLETADO", "CANCELADO"]:
+        print(f"Vuelo {idv} ya {v['estado']}. No se puede cancelar.")
+        return
+    if v["estado"] == "ASIGNADO":
+        for p in pistas.values():
+            if p.get("vueloAsignadoId") == idv:
+                p["estadoPista"] = "LIBRE"
+                p["vueloAsignadoId"] = None
+                p["ocupadaHasta"] = None
+                break
+    v["estado"] = "CANCELADO"
+    v["t_completado"] = tiempo_actual
+    registrar_evento(f"[t={tiempo_actual}] CANCELADO_MANUAL id_vuelo={idv}")
+    print(f"Vuelo {idv} cancelado manualmente.")
 
 # --------------------------
-# MENU / MAIN
+# REPLAY DESDE LOG
+# --------------------------
+def replay_desde_log(ruta: str = LOG_EVENTOS):
+    if not os.path.exists(ruta):
+        print(f"No existe {ruta}")
+        return
+    vuelos = {}
+    pistas = {}
+    tiempo = 0
+    with open(ruta, encoding="utf-8") as f:
+        for linea in f:
+            linea = linea.strip()
+            if linea == "":
+                continue
+            tiempo_str = linea.split("]")[0].replace("[t=", "")
+            try:
+                tiempo = int(tiempo_str)
+            except:
+                continue
+            if "EN_COLA" in linea:
+                partes = linea.split()
+                idv = [p.split("=")[1] for p in partes if p.startswith("id_vuelo=")][0]
+                tipo = [p.split("=")[1] for p in partes if p.startswith("tipo=")][0]
+                if idv not in vuelos:
+                    vuelos[idv] = {
+                        "id": idv,
+                        "tipo": tipo,
+                        "eta": 0 if tipo=="ATERRIZAJE" else None,
+                        "etd": 0 if tipo=="DESPEGUE" else None,
+                        "prioridad": 0,
+                        "combustible": 10 if tipo=="ATERRIZAJE" else None,
+                        "estado": "EN_COLA",
+                        "t_asignacion": None,
+                        "t_completado": None,
+                        "t_entrada_cola": tiempo
+                    }
+            elif "ASIGNACION" in linea:
+                partes = linea.split()
+                idv = [p.split("=")[1] for p in partes if p.startswith("id_vuelo=")][0]
+                idp = [p.split("=")[1] for p in partes if p.startswith("pista=")][0]
+                if idv in vuelos:
+                    vuelos[idv]["estado"] = "ASIGNADO"
+                    vuelos[idv]["t_asignacion"] = tiempo
+                pistas[idp] = {"idPista": idp, "estadoPista": "OCUPADA", "vueloAsignadoId": idv, "uso_count":1, "habilitada":1, "tiempoUso":5, "ocupadaHasta": tiempo+5, "deshabilitadaHasta":None, "categoria":"ESTANDAR"}
+            elif "COMPLETADO" in linea or "CANCELADO" in linea:
+                partes = linea.split()
+                idv = [p.split("=")[1] for p in partes if p.startswith("id_vuelo=")][0]
+                if idv in vuelos:
+                    vuelos[idv]["estado"] = "COMPLETADO" if "COMPLETADO" in linea else "CANCELADO"
+                    vuelos[idv]["t_completado"] = tiempo
+    print(f"Replay cargado desde {ruta}. Tiempo simulado actual: {tiempo}")
+    return vuelos, pistas, tiempo
+
+# --------------------------
+# MENÚ / MAIN
 # --------------------------
 def main():
-    # limpiar log eventos al iniciar (opcional, aquí lo dejamos para siempre empezar limpio)
     if os.path.exists(LOG_EVENTOS):
         os.remove(LOG_EVENTOS)
 
     ruta_vuelos = VUELOS_CSV_DEFECTO
     ruta_pistas = PISTAS_CSV_DEFECTO
 
-    # Intentar cargar estado.json si existe (para reproducir entre ejecuciones)
     tiempo = 0
     vuelos = {}
     pistas = {}
     cargado = cargar_estado_json(ESTADO_JSON)
     if cargado is not None:
-        # ofrecemos cargar el estado guardado o iniciar limpio
         votos = input("Se encontró un estado previo en 'estado.json'. ¿Cargarlo? (S/n): ").strip().lower()
         if votos in ["", "s", "si", "y", "yes"]:
             vuelos, pistas, tiempo = cargado
-            # asegurar los campos faltantes si vienen de CSV parcial
             for v in vuelos.values():
                 if "t_entrada_cola" not in v or v["t_entrada_cola"] is None:
                     v["t_entrada_cola"] = 0
@@ -620,7 +637,6 @@ def main():
             registrar_evento(f"[t=0] EN_COLA id_vuelo={v['id']} tipo={v['tipo']}")
         registrar_evento(f"[t=0] CARGA_INICIAL vuelos={len(vuelos)} pistas={len(pistas)}")
 
-    # intentar asignaciones iniciales al tiempo 0
     asignacion_automatica_pistas(pistas, vuelos, tiempo)
 
     while True:
@@ -636,9 +652,11 @@ def main():
         print("8) Generar informe ahora")
         print("9) Guardar estado.csv")
         print("10) Guardar estado completo (estado.json)")
-        print("11) Cerrar pista temporal N minutos (cerrado automático)")
+        print("11) Cerrar pista temporal N minutos")
         print("12) Toggle habilitar/deshabilitar pista (manual)")
         print("13) Cargar estado desde estado.json")
+        print("14) Cancelar vuelo manual")
+        print("15) Replay desde eventos.log")
         print("0) Salir (genera informe y cierra)")
         opcion = input("Opcion: ").strip()
         if opcion == "1":
@@ -669,7 +687,6 @@ def main():
                 print(f"Ejecutando modo automático por {n} minutos (1min sim = 5s reales)...")
                 for i in range(n):
                     tiempo = avanzar_tiempo(vuelos, pistas, tiempo, 1)
-                    # esperar 5s reales para simular 1 minuto simulado
                     time.sleep(5)
                 print("Modo automático finalizado.")
         elif opcion == "8":
@@ -721,14 +738,34 @@ def main():
                 print("Estado cargado desde estado.json.")
             else:
                 print("No se pudo cargar estado.json.")
+        elif opcion == "14":
+            cancelar_vuelo_manual(vuelos, pistas, tiempo)
+        elif opcion == "15":
+            resultado = replay_desde_log()
+            if resultado is not None:
+                vuelos, pistas, tiempo = resultado
         elif opcion == "0":
             generar_informe(vuelos, pistas, tiempo)
-            print("Simulación finalizada y informe generado.")
-            # guardar estado final automáticamente
-            guardar_estado_json(vuelos, pistas, tiempo)
+            print("Simulación finalizada. Informe generado.")
             break
         else:
-            print("Opción no válida.")
+            print("Opción inválida.")
 
+# --------------------------
+# CIERRE TEMPORAL PISTA
+# --------------------------
+def cerrar_pista_temporal(pistas: Dict[str, Dict], tiempo_actual: int, id_pista: str, minutos: int):
+    if id_pista not in pistas:
+        print("Pista no encontrada.")
+        return
+    p = pistas[id_pista]
+    p["deshabilitadaHasta"] = tiempo_actual + minutos
+    p["estadoPista"] = "DESHABILITADA" if p.get("vueloAsignadoId") is None else "OCUPADA_DESHABILITADA"
+    registrar_evento(f"[t={tiempo_actual}] PISTA_CIERRE_TEMPORAL id_pista={id_pista} duracion={minutos}")
+    print(f"Pista {id_pista} cerrada temporalmente por {minutos} minutos.")
+
+# --------------------------
+# ENTRY POINT
+# --------------------------
 if __name__ == "__main__":
     main()
