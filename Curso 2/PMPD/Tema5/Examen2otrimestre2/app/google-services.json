@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "733096362988",
+    "firebase_url": "https://accexamences-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "accexamences",
+    "storage_bucket": "accexamences.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733096362988:android:e52ce794ec9407e25cf6c9",
+        "android_client_info": {
+          "package_name": "com.example.examen2otrimestre"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD30G_FFwTcyym9ppKcIu2IDtzIp25y3k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inicio">
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:hint="Introduce nombre"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+
+    <EditText
+        android:id="@+id/editTextContrasenia"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Introduce contraseña"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNombre"
+        app:layout_constraintStart_toStartOf="@+id/editTextNombre"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:text="Recordar contraseña"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextContrasenia"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContrasenia" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_marginTop="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=""
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=""
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
