@@ -1,0 +1,24 @@
+<div class="row">
+  @for (item of libros; track $index) {
+    <div class="card" style="width: 18rem">
+      <img src="" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ item.id }}</h5>
+        <p class="card-text">
+          {{ item.Year }}
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        @for (item of libros; track $index) {
+          <li class="list-group-item">{{ item.villains }}</li>
+        }
+      </ul>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary">Detalles</button>
+        <button type="button" class="btn btn-primary" (click)="(agregarCarrito)">
+          Agregar al carrito
+        </button>
+      </div>
+    </div>
+  }
+</div>

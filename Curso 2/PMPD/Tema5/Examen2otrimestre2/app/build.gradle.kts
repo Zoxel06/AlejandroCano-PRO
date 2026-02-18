@@ -60,4 +60,5 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
     implementation("com.google.code.gson:gson:2.13.2")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 }
